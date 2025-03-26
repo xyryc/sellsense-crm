@@ -33,7 +33,7 @@ export default function Sidebar() {
       )}
 
       <div
-        className={`fixed md:relative bg-white dark:bg-gray-800 h-full transition-all duration-300 ease-in-out px-2 ${
+        className={`fixed md:relative bg-white dark:bg-gray-800 h-full transition-all duration-300 ease-in-out px-0 md:px-2 ${
           open ? "w-64" : "w-0 md:w-64"
         }`}
       >
@@ -53,7 +53,7 @@ export default function Sidebar() {
 
         {/* Admin profile */}
         <div
-          className={`pl-7 bg-gray-200 py-2 rounded-md ${
+          className={`pl-7 bg-gray-200 dark:bg-gray-700 py-2 rounded-md ${
             open ? "block" : "hidden md:block"
           }`}
         >
@@ -67,7 +67,7 @@ export default function Sidebar() {
             />
             <div>
               <h3 className="font-semibold">Super Admin</h3>
-              <p className="text-xs text-gray-600">SellSense</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300">SellSense</p>
             </div>
           </div>
         </div>
