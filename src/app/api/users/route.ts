@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const user = await User.create(body);
-    
+
     return NextResponse.json({
       success: true,
       data: user
@@ -28,7 +28,7 @@ export async function GET() {
 
   try {
     const users = await User.find({});
-    
+
     return NextResponse.json({
       success: true,
       count: users.length,
