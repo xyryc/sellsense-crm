@@ -12,7 +12,7 @@ export interface ICustomer extends Document {
   name: string;
   email: string;
   phone: string;
-  location?: string;
+  location: string;
   preferences: string[];
   orderHistory: IOrder[];
   frequency: number;
@@ -25,7 +25,7 @@ const CustomerSchema: Schema<ICustomer> = new Schema(
     name: { type: String, required: true, trim: true },
     email: { type: String, required: true, unique: true, trim: true },
     phone: { type: String, required: true },
-    location: { type: String },
+    location: { type: String, required: true },
     preferences: { type: [String], required: true },
     orderHistory: [
       {
