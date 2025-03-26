@@ -73,7 +73,12 @@ const LoginPage = () => {
         <h1 className="font-bold mt-8 text-center text-slate-500">
           Or Login Using
         </h1>
-        <button onClick={()=> signIn()} className="text-3xl ml-[190px] mt-2">
+        <button
+          onClick={() =>
+            signIn("google", { callbackUrl: "http://localhost:3000" })
+          }
+          className="text-3xl ml-[190px] mt-2"
+        >
           <FcGoogle />
         </button>
       </div>
