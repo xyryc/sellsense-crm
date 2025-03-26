@@ -1,7 +1,9 @@
 "use client";
 
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { FcGoogle } from "react-icons/fc";
 
 type LoginFormData = {
   email: string;
@@ -31,6 +33,7 @@ const LoginPage = () => {
             <input
               {...register("email", { required: "Email is required" })}
               className="w-full p-2 border rounded"
+              placeholder="Enter your Email"
             />
             {errors.email && (
               <p className="text-red-500">{errors.email.message}</p>
@@ -43,6 +46,7 @@ const LoginPage = () => {
               type="password"
               {...register("password", { required: "Password is required" })}
               className="w-full p-2 border rounded"
+              placeholder="Enter your Password"
             />
             {errors.password && (
               <p className="text-red-500">{errors.password.message}</p>
@@ -65,6 +69,13 @@ const LoginPage = () => {
             Create an Account
           </Link>
         </h1>
+        <div className="border-b-2 mt-8"></div>
+        <h1 className="font-bold mt-8 text-center text-slate-500">
+          Or Login Using
+        </h1>
+        <button onClick={()=> signIn()} className="text-3xl ml-[190px] mt-2">
+          <FcGoogle />
+        </button>
       </div>
     </div>
   );
