@@ -1,15 +1,23 @@
 "use client";
 import { useState } from "react";
-import { Menu, X, Home, Settings, Users } from "lucide-react";
+import { Menu, X, Home, Settings, Users, ShoppingBag, Box, Tag, BarChart, Gift, CreditCard, Package } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
-// Sidebar routes with path and icon
+// Sidebar demo routes with path and icon
 const routes = [
-  { name: "Dashboard", path: "/", icon: <Home size={20} /> },
-  { name: "Users", path: "/users", icon: <Users size={20} /> },
-  { name: "Settings", path: "/settings", icon: <Settings size={20} /> },
-];
+    { name: "Dashboard", path: "/", icon: <Home size={20} /> },
+    { name: "Orders", path: "/orders", icon: <ShoppingBag size={20} /> },
+    { name: "Products", path: "/products", icon: <Box size={20} /> },
+    { name: "Categories", path: "/categories", icon: <Tag size={20} /> },
+    { name: "Customers", path: "/customers", icon: <Users size={20} /> },
+    { name: "Analytics", path: "/analytics", icon: <BarChart size={20} /> },
+    { name: "Promotions", path: "/promotions", icon: <Gift size={20} /> },
+    { name: "Payments", path: "/payments", icon: <CreditCard size={20} /> },
+    { name: "Inventory", path: "/inventory", icon: <Package size={20} /> },
+    { name: "Settings", path: "/settings", icon: <Settings size={20} /> },
+  ];
+  
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
@@ -65,7 +73,7 @@ export default function Sidebar() {
         </div>
 
         {/* Sidebar navigation */}
-        <nav className="p-4">
+        <nav className="p-4 space-y-4">
           {routes.map((route) => (
             <Link
               key={route.name}
