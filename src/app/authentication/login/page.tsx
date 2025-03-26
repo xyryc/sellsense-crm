@@ -54,6 +54,9 @@ const LoginPage = () => {
           </div>
 
           <button
+            onClick={() =>
+              signIn("credentials", { callbackUrl: "http://localhost:3000" })
+            }
             type="submit"
             className="w-full border bg-blue-100 text-blue-600 border-blue-200 font-bold p-2 rounded"
           >
