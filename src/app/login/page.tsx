@@ -1,0 +1,61 @@
+"use client";
+
+import { useForm } from "react-hook-form";
+
+type LoginFormData = {
+  email: string;
+  password: string;
+};
+
+const LoginPage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>();
+
+  const onSubmit = (data: LoginFormData) => {
+    console.log("Login Data:", data);
+  };
+
+  return (
+    <div>
+      <h2 className="text-2xl font-bold mb-4">Login</h2>
+      <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div>
+            <label className="block font-medium">Email</label>
+            <input
+              {...register("email", { required: "Email is required" })}
+              className="w-full p-2 border rounded"
+            />
+            {errors.email && (
+              <p className="text-red-500">{errors.email.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="block font-medium">Password</label>
+            <input
+              type="password"
+              {...register("password", { required: "Password is required" })}
+              className="w-full p-2 border rounded"
+            />
+            {errors.password && (
+              <p className="text-red-500">{errors.password.message}</p>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white p-2 rounded"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default LoginPage;
