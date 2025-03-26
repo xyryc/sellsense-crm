@@ -20,8 +20,10 @@ const LoginPage = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Login</h2>
-      <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+      <h2 className="text-5xl font-bold mb-4 mt-24 text-center">
+        Please Login
+      </h2>
+      <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md border mt-12">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <label className="block font-medium">Email</label>
@@ -48,7 +50,7 @@ const LoginPage = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white p-2 rounded"
+            className="w-full border bg-blue-100 text-blue-600 border-blue-200 font-bold p-2 rounded"
           >
             Login
           </button>

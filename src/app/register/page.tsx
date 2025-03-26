@@ -84,7 +84,7 @@ const RegisterPage = () => {
 
           <button
             type="submit"
-            className="w-full border bg-blue-100 text-blue-600 border-blue-200 font-bold p-2 rounded-md"
+            className="w-full border bg-green-100 text-green-600 border-green-200 font-bold p-2 rounded-md"
           >
             Register
           </button>
