@@ -92,7 +92,10 @@ const RegisterPage = () => {
         </form>
         <h1 className=" mt-4 text-slate-500">
           Already have an account?{" "}
-          <Link href="/login" className="font-bold text-blue-500">
+          <Link
+            href="/authentication/login"
+            className="font-bold text-blue-500"
+          >
             Login
           </Link>
         </h1>
