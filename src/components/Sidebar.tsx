@@ -16,8 +16,7 @@ const routes = [
     { name: "Payments", path: "/payments", icon: <CreditCard size={20} /> },
     { name: "Inventory", path: "/inventory", icon: <Package size={20} /> },
     { name: "Settings", path: "/settings", icon: <Settings size={20} /> },
-  ];
-  
+];
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
@@ -35,16 +34,16 @@ export default function Sidebar() {
       <div
         className={`fixed md:relative bg-white dark:bg-gray-800 h-full transition-all duration-300 ease-in-out px-0 md:px-2 ${
           open ? "w-64" : "w-0 md:w-64"
-        }`}
+        } overflow-y-auto max-h-screen`}
       >
         {/* Menu button for sidebar toggling */}
-        <button className="p-4 md:hidden mt-1" onClick={() => setOpen(!open)}>
+        <button className="p-4 relative left-52 md:hidden mt-1" onClick={() => setOpen(!open)}>
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
 
         {/* Main Logo */}
         <div
-          className={`p-4 text-center ${open ? "block" : "hidden md:block"}`}
+          className={`mb-4 text-center ${open ? "block" : "hidden md:block"}`}
         >
           <Link href={"/"} className="text-4xl font-bold text-cyan-500">
             SellSense
@@ -88,6 +87,11 @@ export default function Sidebar() {
           ))}
         </nav>
       </div>
+
+      {/* Always visible menu button */}
+      <button className="fixed top-4 left-4 z-50 md:hidden" onClick={() => setOpen(!open)}>
+        {open ? "" : <Menu size={40} />}
+      </button>
     </>
   );
 }
