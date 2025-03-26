@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 
 type LoginFormData = {
@@ -55,6 +56,10 @@ const LoginPage = () => {
             Login
           </button>
         </form>
+        <h1 className="mt-4  text-slate-500 text-base">
+          Don't have an account?{" "}
+          <Link href='/register' className="text-green-500 font-medium">Create an Account</Link>
+        </h1>
       </div>
     </div>
   );

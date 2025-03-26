@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useForm } from "react-hook-form";
-
+import { FcGoogle } from "react-icons/fc";
 type FormData = {
   name: string;
   email: string;
@@ -25,7 +26,7 @@ const RegisterPage = () => {
       <h2 className="text-5xl font-bold mb-4 text-center mt-24">
         Please Register
       </h2>
-      <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md border mt-12">
+      <div className="max-w-[600px] mx-auto p-6 bg-white rounded-lg shadow-md border mt-12 mb-24">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <label className="block font-medium">Name</label>
@@ -84,11 +85,24 @@ const RegisterPage = () => {
 
           <button
             type="submit"
-            className="w-full border bg-green-100 text-green-600 border-green-200 font-bold p-2 rounded-md"
+            className="w-full border bg-green-100 text-green-600 border-green-200 font-bold p-2 rounded-md mt-10"
           >
             Register
           </button>
         </form>
+        <h1 className=" mt-4 text-slate-500">
+          Already have an account?{" "}
+          <Link href="/login" className="font-bold text-blue-500">
+            Login
+          </Link>
+        </h1>
+        <div className="border-b-2 mt-8"></div>
+        <h1 className="font-bold mt-8 text-center text-slate-500">
+          Or Register Using
+        </h1>
+        <button className="text-3xl ml-[260px] mt-2">
+          <FcGoogle />
+        </button>
       </div>
     </div>
   );
