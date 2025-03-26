@@ -9,11 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "mongodb": "^6.15.0",
+    "mongoose": "^8.13.0",
+    "next": "14.2.26",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.26"
+    "react-dom": "^18"
   },
   "devDependencies": {
+    "mongodb": "^6.15.0",
+    "mongoose": "^8.13.0",
+    "next": "14.2.26",
+    "react": "^18",
+    "react-dom": "^18",
+    "@types/mongoose": "^5.11.96",
     "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
@@ -21,7 +29,6 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.26",
     "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "tailwindcss": "^3.4.1"
   }
 }
