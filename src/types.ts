@@ -38,3 +38,18 @@ export interface Products {
     return_policy: string;
     createdAt: string;
 }
+
+export interface Payments {
+    _id: string;
+    id: string;
+    customerName: string;
+    customerEmail: string;
+    customerLocation: string;
+    paybill: number;
+    due: number;
+    status: string;
+    trxId: string;
+    paymentMethod: string;
+    paymentDate: string;
+    createdAt: string;
+}
