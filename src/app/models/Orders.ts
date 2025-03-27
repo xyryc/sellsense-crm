@@ -18,7 +18,7 @@ const OrderSchema = new mongoose.Schema<IOrder>(
     productId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "Product", // Assuming you have a Product model
+      ref: "Products", // Assuming you have a Product model
     },
     productName: {
       type: String,
@@ -53,7 +53,7 @@ const OrderSchema = new mongoose.Schema<IOrder>(
       default: Date.now,
     },
   },
-  { timestamps: true } // Adds createdAt and updatedAt automatically
+  { timestamps: true }
 );
 
 // Create or retrieve the model
