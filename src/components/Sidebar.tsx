@@ -99,7 +99,7 @@ export default function Sidebar() {
               href={route.path}
               className={`flex items-center p-3 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 hover:translate-x-2 rounded-md ${
                 pathname === route.path
-                  ? "text-cyan-500 dark:text-cyan-500 font-bold" // Active route styling
+                  ? "text-cyan-500 dark:text-cyan-600 font-bold" // Active route styling
                   : ""
               }`}
             >
