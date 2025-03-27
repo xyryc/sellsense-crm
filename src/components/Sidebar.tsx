@@ -1,25 +1,40 @@
 "use client";
 import { useState } from "react";
-import { Menu, X, Home, Settings, Users, ShoppingBag, Box, Tag, BarChart, Gift, CreditCard, Package } from "lucide-react";
+import {
+  Menu,
+  X,
+  Home,
+  Settings,
+  Users,
+  ShoppingBag,
+  Box,
+  Tag,
+  BarChart,
+  Gift,
+  CreditCard,
+  Package,
+} from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation"; // Import usePathname
 
 // Sidebar demo routes with path and icon
 const routes = [
-    { name: "Dashboard", path: "/", icon: <Home size={20} /> },
-    { name: "Orders", path: "/orders", icon: <ShoppingBag size={20} /> },
-    { name: "Products", path: "/products", icon: <Box size={20} /> },
-    { name: "Categories", path: "/categories", icon: <Tag size={20} /> },
-    { name: "Customers", path: "/customers", icon: <Users size={20} /> },
-    { name: "Analytics", path: "/analytics", icon: <BarChart size={20} /> },
-    { name: "Promotions", path: "/promotions", icon: <Gift size={20} /> },
-    { name: "Payments", path: "/payments", icon: <CreditCard size={20} /> },
-    { name: "Inventory", path: "/inventory", icon: <Package size={20} /> },
-    { name: "Settings", path: "/settings", icon: <Settings size={20} /> },
+  { name: "Dashboard", path: "/", icon: <Home size={20} /> },
+  { name: "Orders", path: "/orders", icon: <ShoppingBag size={20} /> },
+  { name: "Products", path: "/products", icon: <Box size={20} /> },
+  { name: "Categories", path: "/categories", icon: <Tag size={20} /> },
+  { name: "Customers", path: "/customers", icon: <Users size={20} /> },
+  { name: "Analytics", path: "/analytics", icon: <BarChart size={20} /> },
+  { name: "Promotions", path: "/promotions", icon: <Gift size={20} /> },
+  { name: "Payments", path: "/payments", icon: <CreditCard size={20} /> },
+  { name: "Inventory", path: "/inventory", icon: <Package size={20} /> },
+  { name: "Settings", path: "/settings", icon: <Settings size={20} /> },
 ];
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname(); // Get the current pathname
 
   return (
     <>
@@ -37,7 +52,10 @@ export default function Sidebar() {
         } overflow-y-auto max-h-screen`}
       >
         {/* Menu button for sidebar toggling */}
-        <button className="p-4 relative left-52 md:hidden mt-1" onClick={() => setOpen(!open)}>
+        <button
+          className="p-4 relative left-52 md:hidden mt-1"
+          onClick={() => setOpen(!open)}
+        >
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
 
@@ -66,7 +84,9 @@ export default function Sidebar() {
             />
             <div>
               <h3 className="font-semibold">Super Admin</h3>
-              <p className="text-xs text-gray-600 dark:text-gray-300">SellSense</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300">
+                SellSense
+              </p>
             </div>
           </div>
         </div>
@@ -77,7 +97,11 @@ export default function Sidebar() {
             <Link
               key={route.name}
               href={route.path}
-              className="flex items-center p-3 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"
+              className={`flex items-center p-3 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 hover:translate-x-2 rounded-md ${
+                pathname === route.path
+                  ? "text-cyan-500 dark:text-cyan-500 font-bold" // Active route styling
+                  : ""
+              }`}
             >
               {route.icon}
               <span className={`${open ? "ml-3" : "hidden md:inline ml-3"}`}>
@@ -89,7 +113,10 @@ export default function Sidebar() {
       </div>
 
       {/* Always visible menu button */}
-      <button className="fixed top-4 left-4 z-50 md:hidden" onClick={() => setOpen(!open)}>
+      <button
+        className="fixed top-4 left-4 z-50 md:hidden"
+        onClick={() => setOpen(!open)}
+      >
         {open ? "" : <Menu size={40} />}
       </button>
     </>
