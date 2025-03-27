@@ -7,3 +7,19 @@ export interface Customer {
     location: string;
     createdAt: string
 }
+
+export interface Orders {
+    _id: string;
+    customerName: string;
+    customerEmail: string;
+    customerLocation: string;
+    productName: string;
+    productPrice: number;
+    totalPrice: number;
+    totalQuantity: number;
+    category: string;
+    brand: string;
+    orderDate: string;
+    createdAt: string
+
+}
