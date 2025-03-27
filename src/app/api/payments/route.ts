@@ -1,17 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "../../lib/dbConnect";
-import Order from "../../models/Order";
+import Payment from "../../models/Payment";
 
-// CREATE - POST /api/orders
+// CREATE - POST /api/payments
 export async function POST(request: NextRequest) {
   await dbConnect();
 
   try {
     const body = await request.json();
 
-    const order = await Order.create(body);
+    const payment = await Payment.create(body);
 
-    return NextResponse.json({ success: true, data: order }, { status: 201 });
+    return NextResponse.json({ success: true, data: payment }, { status: 201 });
   } catch (error: any) {
     return NextResponse.json(
       { success: false, error: error.message },
@@ -19,13 +19,13 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-// GET ALL PRODUCTS - GET /api/orders
+// GET ALL PRODUCTS - GET /api/payments
 export async function GET() {
   await dbConnect();
 
   try {
-    const order = await Order.find({});
-    return NextResponse.json({ success: true, data: order }, { status: 200 });
+    const payment = await Payment.find({});
+    return NextResponse.json({ success: true, data: payment }, { status: 200 });
   } catch (error: any) {
     return NextResponse.json(
       { success: false, error: error.message },

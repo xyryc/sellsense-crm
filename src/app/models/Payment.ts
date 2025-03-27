@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema } from "mongoose";
 
-// Define the PaymentHistory interface to enforce types
+// Define TypeScript interface
 interface Payment extends Document {
   id: string;
   customerName: string;
