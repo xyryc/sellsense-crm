@@ -102,12 +102,19 @@ export async function PATCH(
       }, { status: 404 });
     }
     
-    // Add note using the method we defined in the schema
-    await contact.addNote(type, content, createdBy);
+    // Add note to the specified type
+    contact[type].push({
+      content,
+      createdBy,
+      createdAt: new Date()
+    });
+    
+    // Save the updated contact
+    const updatedContact = await contact.save();
     
     return NextResponse.json({
-      message: 'Note added successfully',
-      contact
+      message: `${type} note added successfully`,
+      contact: updatedContact
     });
   } catch (error: any) {
     return NextResponse.json({
