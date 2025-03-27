@@ -15,7 +15,7 @@ const Orders = async () => {
   return (
     <div>
       <div>
-        <h1 className="text-xl font-bold mb-4">Customers</h1>
+        <h1 className="text-xl font-bold mb-4">Orders</h1>
         {/* Pass the fetched customer data to the CustomersTable component as a prop */}
         <OrdersTable initialOrders={orders} />
       </div>

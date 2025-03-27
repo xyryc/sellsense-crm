@@ -21,5 +21,20 @@ export interface Orders {
     brand: string;
     orderDate: string;
     createdAt: string
+}
 
+export interface Products {
+    _id: string;
+    name: string;
+    description: string;
+    price: number;
+    discount: number
+    stock: number
+    category: string;
+    brand: string;
+    rating: number;
+    reviews: number;
+    warranty: string;
+    return_policy: string;
+    createdAt: string;
 }
