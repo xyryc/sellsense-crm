@@ -9,11 +9,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const user = await User.create(body);
-<<<<<<< HEAD
     
-=======
-
->>>>>>> e41f11b498a3ac73aa094ba961614b20b67c3231
     return NextResponse.json({
       success: true,
       data: user
@@ -32,11 +28,8 @@ export async function GET() {
 
   try {
     const users = await User.find({});
-<<<<<<< HEAD
     
-=======
 
->>>>>>> e41f11b498a3ac73aa094ba961614b20b67c3231
     return NextResponse.json({
       success: true,
       count: users.length,
