@@ -4,40 +4,59 @@ import { useState } from "react";
 import { Customer } from "../types";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { Search } from "lucide-react";
+import { Search, Trash2 } from "lucide-react";
 
-// Define the interface for the props passed to this component
 interface CustomersTableProps {
-  initialCustomers: Customer[]; // Initial customer data passed as a prop
+  initialCustomers: Customer[];
 }
 
 export default function CustomersTable({
   initialCustomers,
 }: CustomersTableProps) {
-  // State to store the search query entered by the user
   const [search, setSearch] = useState("");
-
-  // State to store the list of customers, initialized with the passed data
   const [customers, setCustomers] = useState<Customer[]>(initialCustomers);
-
-  // State to store the sorting order (newest or oldest)
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
+  const [isDeleting, setIsDeleting] = useState<string | null>(null); // Track which customer is being deleted
 
-  // Filter the customers based on the search query, checking if the name or location matches the input
   const filteredCustomers = customers.filter(
     (customer) =>
       customer.name.toLowerCase().includes(search.toLowerCase()) ||
       customer.location.toLowerCase().includes(search.toLowerCase())
   );
 
-  // Sort customers based on the selected order (newest or oldest)
   const sortedCustomers = filteredCustomers.sort((a, b) => {
     if (sortOrder === "newest") {
-      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(); // Newest first
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     } else {
-      return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(); // Oldest first
+      return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
     }
   });
+
+  
+  const handleDelete = async (id: string) => {
+    setIsDeleting(id);
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/customers/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete customer");
+      }
+
+      // Remove the customer from the local state
+      setCustomers(customers.filter((customer) => customer._id !== id));
+      alert("Customer deleted successfully");
+    } catch (error) {
+      console.error("Error deleting customer:", error);
+      alert("Failed to delete customer");
+    } finally {
+      setIsDeleting(null);
+    }
+  };
 
   return (
     <>
@@ -46,15 +65,14 @@ export default function CustomersTable({
           <Input
             type="search"
             placeholder="Search by name or location..."
-            value={search} // Controlled input value is tied to the 'search' state
-            onChange={(e) => setSearch(e.target.value)} // Update 'search' state when the user types
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             className="border p-2 rounded mb-4 w-[50vw] dark:bg-gray-700 pr-10"
           />
           <Button className="relative -left-12 bottom-2 bg-transparent dark:text-white text-black shadow-none hover:bg-transparent">
             <Search />
           </Button>
         </div>
-        {/* Sort dropdown */}
         <div className="mb-4">
           <label htmlFor="sort" className="mr-2">
             Sort By:
@@ -73,7 +91,6 @@ export default function CustomersTable({
         </div>
       </div>
 
-      {/* Table to display the customers */}
       <table className="w-full border-collapse border border-gray-300">
         <thead>
           <tr>
@@ -81,20 +98,34 @@ export default function CustomersTable({
             <th className="border p-2">Email</th>
             <th className="border p-2">Phone</th>
             <th className="border p-2">Location</th>
+            <th className="border p-2">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {/* Map through the sorted and filtered customers to display each in a table row */}
           {sortedCustomers.map((customer) => (
             <tr
               key={customer._id}
               className="hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
             >
-              {/* Table data cells for each customer property */}
               <td className="border p-2">{customer.name}</td>
               <td className="border p-2">{customer.email}</td>
               <td className="border p-2">{customer.phone}</td>
               <td className="border p-2">{customer.location}</td>
+              <td className="border p-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => handleDelete(customer._id)}
+                  disabled={isDeleting === customer._id}
+                  className="text-red-500 hover:text-red-700"
+                >
+                  {isDeleting === customer._id ? (
+                    "Deleting..."
+                  ) : (
+                    <Trash2 className="h-4 w-4" />
+                  )}
+                </Button>
+              </td>
             </tr>
           ))}
         </tbody>
