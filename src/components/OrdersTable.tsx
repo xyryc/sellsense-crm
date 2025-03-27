@@ -19,6 +19,9 @@ export default function OrdersTable({ initialOrders }: OrdersTableProps) {
   const filteredOrders = orders.filter(
     (order) =>
       order.customerName.toLowerCase().includes(search.toLowerCase()) ||
+      order.customerLocation.toLowerCase().includes(search.toLowerCase()) ||
+      order.category.toLowerCase().includes(search.toLowerCase()) ||
+      order.productName.toLowerCase().includes(search.toLowerCase()) ||
       order.customerEmail.toLowerCase().includes(search.toLowerCase())
   );
 
