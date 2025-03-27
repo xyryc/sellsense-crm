@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
 
 // Define TypeScript interface for Product
-export interface IProduct extends mongoose.Document {
-  productId: string;
+export interface IProducts extends mongoose.Document {
   name: string;
   description: string;
   price: number;
@@ -18,14 +17,8 @@ export interface IProduct extends mongoose.Document {
 }
 
 // Create Mongoose Schema
-const ProductSchema = new mongoose.Schema<IProduct>(
+const ProductSchema = new mongoose.Schema<IProducts>(
   {
-    productId: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-    },
     name: {
       type: String,
       required: true,
@@ -87,4 +80,4 @@ const ProductSchema = new mongoose.Schema<IProduct>(
 
 // Create or retrieve the model
 export default mongoose.models.Product ||
-  mongoose.model<IProduct>("Product", ProductSchema);
+  mongoose.model<IProducts>("Products", ProductSchema);

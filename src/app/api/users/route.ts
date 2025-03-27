@@ -10,7 +10,6 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const user = await User.create(body);
     
-
     return NextResponse.json({
       success: true,
       data: user

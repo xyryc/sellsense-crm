@@ -1,35 +1,39 @@
 import { NextRequest, NextResponse } from "next/server";
-import dbConnect from "../../lib/dbConnect";
-import Orders from "../../models/Orders";
+import dbConnect from "../../lib/dbConnect"; // Path to your dbConnect function
+import Order from "../../models/Order"; // Path to your Order model
 
 // CREATE - POST /api/orders
 export async function POST(request: NextRequest) {
   await dbConnect();
+
   try {
     const body = await request.json();
-    const order = await Orders.create(body);
-    return NextResponse.json({ success: true, data: order }, { status: 201 });
-  } catch (error: any) {
-    return NextResponse.json(
-      { success: false, error: error.message },
-      { status: 400 }
-    );
-  }
-}
 
-// READ ALL - GET /api/orders
-export async function GET() {
-  await dbConnect();
-  try {
-    const orders = await Orders.find({});
-    return NextResponse.json(
-      { success: true, count: orders.length, data: orders },
-      { status: 200 }
-    );
+    // Destructuring and basic validation
+    const { productId, name, price, quantity, totalAmount, status } = body;
+
+    if (!productId || !name || !price || !quantity || !totalAmount || !status) {
+      throw new Error('All fields are required');
+    }
+
+    const order = await Order.create({
+      productId,
+      name,
+      price,
+      quantity,
+      totalAmount,
+      status,
+    });
+
+    return NextResponse.json({
+      success: true,
+      data: order
+    }, { status: 201 });
+
   } catch (error: any) {
-    return NextResponse.json(
-      { success: false, error: error.message },
-      { status: 400 }
-    );
+    return NextResponse.json({
+      success: false,
+      error: error.message
+    }, { status: 400 });
   }
 }
