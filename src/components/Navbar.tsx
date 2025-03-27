@@ -1,13 +1,6 @@
-"use client";
-import {
-  Bell,
-  LogOut,
-  MessageCircle,
-  Moon,
-  Search,
-  Sun,
-  User,
-} from "lucide-react";
+"use client"
+import { Bell, LogOut, MessageCircle, Moon, Search, Sun, User } from "lucide-react";
+
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
