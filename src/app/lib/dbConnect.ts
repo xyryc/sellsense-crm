@@ -11,14 +11,14 @@ const globalConnection = global as unknown as { mongoose?: ConnectionObject };
 async function dbConnect(): Promise<void> {
   // Check if already connected
   if (globalConnection.mongoose?.isConnected) {
-    console.log('🔄 Using existing database connection');
+    // console.log('🔄 Using existing database connection');
     return;
   }
 
   // Ensure MongoDB URI is present
   const MONGODB_URI = process.env.MONGODB_URI;
   if (!MONGODB_URI) {
-    console.error('❌ MONGODB_URI is not defined');
+    // console.error('❌ MONGODB_URI is not defined');
     throw new Error('MONGODB_URI must be defined');
   }
 
@@ -33,9 +33,9 @@ async function dbConnect(): Promise<void> {
       isConnected: conn.connections[0].readyState
     };
 
-    console.log('✅ Database connected successfully');
+    // console.log('✅ Database connected successfully');
   } catch (error) {
-    console.error('❌ Error connecting to the database:', error);
+    // console.error('❌ Error connecting to the database:', error);
     throw error;
   }
 }
