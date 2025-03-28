@@ -13,8 +13,10 @@ interface OrdersTableProps {
 export default function OrdersTable({ initialOrders }: OrdersTableProps) {
   const [search, setSearch] = useState("");
   const [orders, setOrders] = useState<Orders[]>(initialOrders);
-  const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
-  const [isDeleting, setIsDeleting] = useState<string | null>(null); // Track which customer is being deleted
+  const [sortOrder, setSortOrder] = useState<
+    "newest" | "oldest" | "totalPriceAsc" | "totalPriceDesc"
+  >("newest");
+  const [isDeleting, setIsDeleting] = useState<string | null>(null);
 
   const filteredOrders = orders.filter(
     (order) =>
@@ -26,10 +28,17 @@ export default function OrdersTable({ initialOrders }: OrdersTableProps) {
   );
 
   const sortedOrders = filteredOrders.sort((a, b) => {
-    if (sortOrder === "newest") {
-      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-    } else {
-      return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+    switch (sortOrder) {
+      case "newest":
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      case "oldest":
+        return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+      case "totalPriceAsc":
+        return a.totalPrice - b.totalPrice;
+      case "totalPriceDesc":
+        return b.totalPrice - a.totalPrice;
+      default:
+        return 0;
     }
   });
 
@@ -44,7 +53,6 @@ export default function OrdersTable({ initialOrders }: OrdersTableProps) {
         throw new Error("Failed to delete customer");
       }
 
-      // Remove the order from the local state
       setOrders(orders.filter((order) => order._id !== id));
       alert("Customer deleted successfully");
     } catch (error) {
@@ -78,12 +86,14 @@ export default function OrdersTable({ initialOrders }: OrdersTableProps) {
             id="sort"
             value={sortOrder}
             onChange={(e) =>
-              setSortOrder(e.target.value as "newest" | "oldest")
+              setSortOrder(e.target.value as "newest" | "oldest" | "totalPriceAsc" | "totalPriceDesc")
             }
             className="border p-2 rounded dark:bg-gray-700"
           >
             <option value="newest">Newest</option>
             <option value="oldest">Oldest</option>
+            <option value="totalPriceAsc">Total Price (Low to High)</option>
+            <option value="totalPriceDesc">Total Price (High to Low)</option>
           </select>
         </div>
       </div>
@@ -92,6 +102,7 @@ export default function OrdersTable({ initialOrders }: OrdersTableProps) {
         <table className="w-full border-collapse border border-gray-300 min-w-[800px]">
           <thead>
             <tr>
+              <th className="border p-2"></th>
               <th className="border p-2">Name</th>
               <th className="border p-2">Email</th>
               <th className="border p-2">Product Name</th>
@@ -106,11 +117,12 @@ export default function OrdersTable({ initialOrders }: OrdersTableProps) {
             </tr>
           </thead>
           <tbody>
-            {sortedOrders.map((order) => (
+            {sortedOrders.map((order, idx) => (
               <tr
                 key={order._id}
-                className="hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
+                className="hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 text-center"
               >
+                <td className="border p-2">{idx + 1}</td>
                 <td className="border p-2">{order.customerName}</td>
                 <td className="border p-2">{order.customerEmail}</td>
                 <td className="border p-2">{order.productName}</td>
