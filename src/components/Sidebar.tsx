@@ -1,29 +1,30 @@
 "use client";
-import { useState } from "react";
 import {
-  Menu,
-  X,
-  Home,
-  Settings,
-  Users,
-  ShoppingBag,
-  Box,
-  Tag,
   BarChart,
-  Gift,
+  Box,
+  Contact,
   CreditCard,
+  Gift,
+  Home,
+  Menu,
   Package,
+  Settings,
+  ShoppingBag,
+  Users,
+  X
 } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation"; // Import usePathname
+import { useState } from "react";
 
 // Sidebar demo routes with path and icon
 const routes = [
   { name: "Dashboard", path: "/", icon: <Home size={20} /> },
   { name: "Orders", path: "/orders", icon: <ShoppingBag size={20} /> },
   { name: "Products", path: "/products", icon: <Box size={20} /> },
-  { name: "Categories", path: "/categories", icon: <Tag size={20} /> },
+  { name: "Suppliers", path: "/suppliers", icon: <Box size={20} /> },
+  { name: "Contacts", path: "/contacts", icon: <Contact size={20} /> },
   { name: "Customers", path: "/customers", icon: <Users size={20} /> },
   { name: "Analytics", path: "/analytics", icon: <BarChart size={20} /> },
   { name: "Promotions", path: "/promotions", icon: <Gift size={20} /> },
@@ -99,7 +100,7 @@ export default function Sidebar() {
               href={route.path}
               className={`flex items-center p-3 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 hover:translate-x-2 rounded-md ${
                 pathname === route.path
-                  ? "text-cyan-500 dark:text-cyan-500 font-bold" // Active route styling
+                  ? "text-cyan-500 dark:text-cyan-600 font-bold" // Active route styling
                   : ""
               }`}
             >

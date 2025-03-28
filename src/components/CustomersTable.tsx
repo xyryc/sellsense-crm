@@ -94,6 +94,7 @@ export default function CustomersTable({
       <table className="w-full border-collapse border border-gray-300">
         <thead>
           <tr>
+            <th className="border p-2"></th>
             <th className="border p-2">Name</th>
             <th className="border p-2">Email</th>
             <th className="border p-2">Phone</th>
@@ -102,11 +103,12 @@ export default function CustomersTable({
           </tr>
         </thead>
         <tbody>
-          {sortedCustomers.map((customer) => (
+          {sortedCustomers.map((customer, idx) => (
             <tr
               key={customer._id}
-              className="hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
+              className="hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 text-center"
             >
+              <td className="border p-2">{idx + 1}</td>
               <td className="border p-2">{customer.name}</td>
               <td className="border p-2">{customer.email}</td>
               <td className="border p-2">{customer.phone}</td>
