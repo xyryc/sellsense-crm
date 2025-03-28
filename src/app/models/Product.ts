@@ -1,7 +1,7 @@
+
 import mongoose, { Schema, Document, model } from "mongoose";
 // Define TypeScript interface
 export interface IProduct extends Document {
-  id: string;
   name: string;
   description: string;
   price: number;
@@ -17,7 +17,6 @@ export interface IProduct extends Document {
 // Define Mongoose schema with validation
 const ProductSchema = new Schema<IProduct>(
   {
-    id: { type: String, required: true, unique: true },
     name: { type: String, required: true, trim: true, minlength: 3 },
     description: { type: String, required: true, minlength: 10 },
     price: { type: Number, required: true, min: 0 },
