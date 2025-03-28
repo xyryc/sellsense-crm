@@ -56,7 +56,7 @@ const LoginPage = () => {
           <button
             onClick={() =>
               signIn("credentials", {
-                callbackUrl: `${process.env.NEXT_PUBLIC_API_URL}`,
+                callbackUrl: `${window.location.origin}/dashboard`,
               })
             }
             type="submit"
@@ -81,7 +81,7 @@ const LoginPage = () => {
         <button
           onClick={() =>
             signIn("google", {
-              callbackUrl: `${process.env.NEXT_PUBLIC_API_URL}`,
+              callbackUrl: `${window.location.origin}/dashboard`,
             })
           }
           className="text-3xl ml-[190px] mt-2"
