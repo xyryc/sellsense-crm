@@ -53,3 +53,12 @@ export interface Payments {
     paymentDate: string;
     createdAt: string;
 }
+
+export interface Suppliers {
+    _id: string;
+    name: string;
+    contactEmail: string;
+    phone: string;
+    address: string;
+    createdAt: string;
+}

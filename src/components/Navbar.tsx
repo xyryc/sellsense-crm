@@ -36,7 +36,7 @@ export default function Navbar() {
     }
   };
   return (
-    <div className="h-16 bg-white dark:bg-gray-800 flex items-center justify-between px-6 md:px-2 shadow-md">
+    <div className="h-16 py-3 md:py-0 bg-white dark:bg-gray-800 flex items-center justify-between px-6 md:px-2 shadow-md">
       {/* search box */}
       <div className="items-center hidden md:flex">
         <Input

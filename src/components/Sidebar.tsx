@@ -23,6 +23,7 @@ const routes = [
   { name: "Dashboard", path: "/", icon: <Home size={20} /> },
   { name: "Orders", path: "/orders", icon: <ShoppingBag size={20} /> },
   { name: "Products", path: "/products", icon: <Box size={20} /> },
+  { name: "Suppliers", path: "/suppliers", icon: <Box size={20} /> },
   { name: "Categories", path: "/categories", icon: <Tag size={20} /> },
   { name: "Customers", path: "/customers", icon: <Users size={20} /> },
   { name: "Analytics", path: "/analytics", icon: <BarChart size={20} /> },

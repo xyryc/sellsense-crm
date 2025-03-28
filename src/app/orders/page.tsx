@@ -11,7 +11,6 @@ async function getOrders(): Promise<OrdersType[]> {
 
 const Orders = async () => {
   const orders = await getOrders();
-  console.log("inside orders =====> ", orders);
   return (
     <div>
       <div>

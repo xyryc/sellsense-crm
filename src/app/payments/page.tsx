@@ -10,13 +10,11 @@ async function getPayments(): Promise<PaymentsProps[]> {
 
 const Payments = async () => {
   const payments = await getPayments();
-  console.log("inside payments =====> ", payments);
   return (
     <div>
       <div>
         <h1 className="text-xl font-bold mb-4">Products</h1>
         {/* Pass the fetched customer data to the CustomersTable component as a prop */}
-        {/* <ProductsTable initialPayments={payments} /> */}
         <PaymentTable initialPayments={payments} />
       </div>
     </div>

@@ -10,7 +10,6 @@ async function getProducts(): Promise<ProductsProps[]> {
 
 const Products = async () => {
   const products = await getProducts();
-  console.log("inside orders =====> ", products);
   return (
     <div>
       <div>
