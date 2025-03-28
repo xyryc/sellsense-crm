@@ -25,7 +25,7 @@ async function dbConnect(): Promise<void> {
   try {
     // Connect to MongoDB
     const conn = await mongoose.connect(MONGODB_URI, {
-      serverSelectionTimeoutMS: 5000,
+      serverSelectionTimeoutMS: 3000,
     });
 
     // Set the connection state
