@@ -1,34 +1,34 @@
 "use client";
 
 import { useState } from "react";
-import { Suppliers } from "../types";
+import { Contacts } from "../types";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Search, Trash2 } from "lucide-react";
 
-interface SuppliersTableProps {
-  initialSuppliers: Suppliers[];
+interface ContactsTableProps {
+  initialContacts: Contacts[];
 }
 
-export default function SuppliersTable({
-  initialSuppliers: initialSuppliers,
-}: SuppliersTableProps) {
+export default function ContactsTable({
+  initialContacts: initialContacts,
+}: ContactsTableProps) {
   const [search, setSearch] = useState("");
-  const [suppliers, setSuppliers] = useState<Suppliers[]>(initialSuppliers);
-  const [sortSuppliers, setSortSuppliers] = useState<"newest" | "oldest">(
+  const [contacts, setContacts] = useState<Contacts[]>(initialContacts);
+  const [sortContacts, setSortContacts] = useState<"newest" | "oldest">(
     "newest"
   );
   const [isDeleting, setIsDeleting] = useState<string | null>(null);
 
-  const filteredSuppliers = suppliers.filter(
-    (supplier) =>
-      supplier.name.toLowerCase().includes(search.toLowerCase()) ||
-      supplier.contactEmail.toLowerCase().includes(search.toLowerCase()) ||
-      supplier.address.toLowerCase().includes(search.toLowerCase())
+  const filteredContacts = (contacts || []).filter(
+    (contact) =>
+      contact.name.toLowerCase().includes(search.toLowerCase()) ||
+      contact.email.toLowerCase().includes(search.toLowerCase()) ||
+      contact.company.toLowerCase().includes(search.toLowerCase())
   );
 
-  const sortedSuppliers = filteredSuppliers.sort((a, b) => {
-    switch (sortSuppliers) {
+  const sortedContacts = filteredContacts.sort((a, b) => {
+    switch (sortContacts) {
       case "newest":
         return (
           new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -45,15 +45,15 @@ export default function SuppliersTable({
   const handleDelete = async (id: string) => {
     setIsDeleting(id);
     try {
-      const response = await fetch(`http://localhost:3000/api/suppliers/${id}`, {
+      const response = await fetch(`http://localhost:3000/api/contacts/${id}`, {
         method: "DELETE",
       });
 
       if (!response.ok) {
-        throw new Error("Failed to delete suppliers");
+        throw new Error("Failed to delete contacts");
       }
 
-      setSuppliers(suppliers.filter((supplier) => supplier._id !== id));
+      setContacts(contacts.filter((contact) => contact._id !== id));
       alert("Supplier deleted successfully");
     } catch (error) {
       console.error("Error deleting supplier:", error);
@@ -84,9 +84,9 @@ export default function SuppliersTable({
           </label>
           <select
             id="sort"
-            value={sortSuppliers}
+            value={sortContacts}
             onChange={(e) =>
-              setSortSuppliers(e.target.value as "newest" | "oldest")
+              setSortContacts(e.target.value as "newest" | "oldest")
             }
             className="border p-2 rounded dark:bg-gray-700"
           >
@@ -101,33 +101,35 @@ export default function SuppliersTable({
           <thead>
             <tr>
               <th className="border p-2"></th>
-              <th className="border p-2">Supplier Name</th>
+              <th className="border p-2">Name</th>
               <th className="border p-2">Email</th>
               <th className="border p-2">Phone</th>
-              <th className="border p-2">Address</th>
+              <th className="border p-2">Company</th>
+              <th className="border p-2">Status</th>
               <th className="border p-2">Delete</th>
             </tr>
           </thead>
           <tbody>
-            {sortedSuppliers.map((supplier, idx) => (
+            {sortedContacts.map((contact, idx) => (
               <tr
-                key={supplier._id}
+                key={contact._id}
                 className="hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 text-center"
               >
                 <td className="border p-2">{idx + 1}</td>
-                <td className="border p-2">{supplier.name}</td>
-                <td className="border p-2">{supplier.contactEmail}</td>
-                <td className="border p-2">{supplier.phone}</td>
-                <td className="border p-2">{supplier.address}</td>
+                <td className="border p-2">{contact.name}</td>
+                <td className="border p-2">{contact.email}</td>
+                <td className="border p-2">{contact.phone}</td>
+                <td className="border p-2">{contact.company}</td>
+                <td className="border p-2">{contact.status}</td>
                 <td className="border p-2">
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => handleDelete(supplier._id)}
-                    disabled={isDeleting === supplier._id}
+                    onClick={() => handleDelete(contact._id)}
+                    disabled={isDeleting === contact._id}
                     className="text-red-500 hover:text-red-700"
                   >
-                    {isDeleting === supplier._id ? (
+                    {isDeleting === contact._id ? (
                       "Deleting..."
                     ) : (
                       <Trash2 className="h-4 w-4" />

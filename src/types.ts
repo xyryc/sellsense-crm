@@ -62,3 +62,13 @@ export interface Suppliers {
     address: string;
     createdAt: string;
 }
+
+export interface Contacts {
+    _id: string;
+    name: string;
+    email: string;
+    phone: string;
+    company: string;
+    status: 'Active' | 'Inactive' | 'Prospect' | 'Customer';  // Enum 
+    createdAt: string;  // Date when the contact was created
+}

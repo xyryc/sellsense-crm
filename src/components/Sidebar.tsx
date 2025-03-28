@@ -1,22 +1,22 @@
 "use client";
-import { useState } from "react";
 import {
-  Menu,
-  X,
-  Home,
-  Settings,
-  Users,
-  ShoppingBag,
-  Box,
-  Tag,
   BarChart,
-  Gift,
+  Box,
+  Contact,
   CreditCard,
+  Gift,
+  Home,
+  Menu,
   Package,
+  Settings,
+  ShoppingBag,
+  Users,
+  X
 } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation"; // Import usePathname
+import { useState } from "react";
 
 // Sidebar demo routes with path and icon
 const routes = [
@@ -24,7 +24,7 @@ const routes = [
   { name: "Orders", path: "/orders", icon: <ShoppingBag size={20} /> },
   { name: "Products", path: "/products", icon: <Box size={20} /> },
   { name: "Suppliers", path: "/suppliers", icon: <Box size={20} /> },
-  { name: "Categories", path: "/categories", icon: <Tag size={20} /> },
+  { name: "Contacts", path: "/contacts", icon: <Contact size={20} /> },
   { name: "Customers", path: "/customers", icon: <Users size={20} /> },
   { name: "Analytics", path: "/analytics", icon: <BarChart size={20} /> },
   { name: "Promotions", path: "/promotions", icon: <Gift size={20} /> },
