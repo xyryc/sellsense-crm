@@ -22,11 +22,9 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
-      <h2 className="text-5xl font-bold mb-4 mt-24 text-center">
-        Please Login
-      </h2>
-      <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md border mt-12">
+    <div className="flex justify-center items-center min-h-screen flex-col ">
+      <h2 className="text-5xl font-bold text-center">Please Login</h2>
+      <div className="max-w-md mx-auto w-full p-6 bg-white rounded-lg shadow-md border mt-12">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <label className="block font-medium">Email</label>
@@ -67,10 +65,7 @@ const LoginPage = () => {
         </form>
         <h1 className="mt-4  text-slate-500 text-base">
           Dont have an account?{" "}
-          <Link
-            href="/authentication/register"
-            className="text-green-500 font-medium"
-          >
+          <Link href="/register" className="text-green-500 font-medium">
             Create an Account
           </Link>
         </h1>

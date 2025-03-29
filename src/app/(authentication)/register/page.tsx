@@ -22,11 +22,9 @@ const RegisterPage = () => {
   };
 
   return (
-    <div>
-      <h2 className="text-5xl font-bold mb-4 text-center mt-24">
-        Please Register
-      </h2>
-      <div className="max-w-[600px] mx-auto p-6 bg-white rounded-lg shadow-md border mt-12 mb-24">
+    <div className="flex justify-center items-center min-h-screen flex-col">
+      <h2 className="text-5xl font-bold mb-4 text-center ">Please Register</h2>
+      <div className="max-w-[600px] mx-auto w-full p-6 bg-white rounded-lg shadow-md border mt-12 mb-24">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <label className="block font-medium">Name</label>
@@ -92,10 +90,7 @@ const RegisterPage = () => {
         </form>
         <h1 className=" mt-4 text-slate-500">
           Already have an account?{" "}
-          <Link
-            href="/authentication/login"
-            className="font-bold text-blue-500"
-          >
+          <Link href="/login" className="font-bold text-blue-500">
             Login
           </Link>
         </h1>

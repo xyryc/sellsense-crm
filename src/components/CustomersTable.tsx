@@ -1,22 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Customer } from "../types";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Search, Trash2 } from "lucide-react";
 
-interface CustomersTableProps {
-  initialCustomers: Customer[];
-}
-
-export default function CustomersTable({
-  initialCustomers,
-}: CustomersTableProps) {
+export default function CustomersTable() {
   const [search, setSearch] = useState("");
-  const [customers, setCustomers] = useState<Customer[]>(initialCustomers);
+  const [customers, setCustomers] = useState<Customer[]>([]);
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
   const [isDeleting, setIsDeleting] = useState<string | null>(null); // Track which customer is being deleted
+
+  // refresh component to show fetched data
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // function to fetch customers data form "api/customers"
+  async function fetchData() {
+    const res = await fetch("/api/customers");
+    const data = await res.json();
+    setCustomers(data.data);
+  }
 
   const filteredCustomers = customers.filter(
     (customer) =>
