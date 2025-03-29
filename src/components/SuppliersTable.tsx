@@ -46,7 +46,7 @@ export default function SuppliersTable({
     setIsDeleting(id);
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/suppliers/${id}`,
+        `http://localhost:3000/api/suppliers/${id}`,
         {
           method: "DELETE",
         }

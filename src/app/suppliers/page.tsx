@@ -2,7 +2,7 @@ import SuppliersTable from "@/components/SuppliersTable";
 import { Suppliers as SuppliersProps } from "../../types";
 // Async function to fetch customer data from the API
 async function getSuppliers(): Promise<SuppliersProps[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/suppliers`);
+  const res = await fetch('http://localhost:3000/api/suppliers');
   const data = await res.json();
   return data.data;
 }
