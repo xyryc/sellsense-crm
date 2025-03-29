@@ -30,6 +30,7 @@ const routes = [
   { name: "Promotions", path: "/promotions", icon: <Gift size={20} /> },
   { name: "Payments", path: "/payments", icon: <CreditCard size={20} /> },
   { name: "Inventory", path: "/inventory", icon: <Package size={20} /> },
+  { name: "Referral", path: "/referral", icon: <Home size={20} /> },
   { name: "Settings", path: "/settings", icon: <Settings size={20} /> },
 ];
 

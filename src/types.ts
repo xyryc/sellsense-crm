@@ -72,3 +72,26 @@ export interface Contacts {
     status: 'Active' | 'Inactive' | 'Prospect' | 'Customer';  // Enum 
     createdAt: string;  // Date when the contact was created
 }
+
+// types for Referral
+export interface ReferralData {
+    _id: string;
+    referrerId: string;
+    referralCode: string;
+    rewardPoints: number;
+    status: 'pending' | 'completed' | 'cancelled';
+    createdAt: string;
+  }
+  
+  export interface ApiResponse<T> {
+    success: boolean;
+    data?: T;
+    message?: string;
+  }
+  
+  export interface ReferralUser {
+    id: string | number;
+    username: string;
+    status: 'pending' | 'completed';
+    date: string;
+  }
