@@ -1,23 +1,61 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import OrdersTable from "@/components/OrdersTable";
 import { Orders as OrdersType } from "../../types";
-import React from "react";
-// Async function to fetch customer data from the API
+
+// Async function to fetch orders data from the API
 async function getOrders(): Promise<OrdersType[]> {
-  const res = await fetch('http://localhost:3000/api/orders');
-  const data = await res.json();
-  console.log(data.data);
-  return data.data;
+  try {
+    const res = await fetch('/api/orders');
+    if (!res.ok) {
+      throw new Error("Failed to fetch orders");
+    }
+    const data = await res.json();
+    console.log(data.data); // This is the data structure you are logging
+    return data.data;
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    return []; // Return an empty array in case of error
+  }
 }
 
-const Orders = async () => {
-  const orders = await getOrders();
+const Orders = () => {
+  const [orders, setOrders] = useState<OrdersType[]>([]); // State to store orders
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState<string | null>(null); // Error state
+
+  // useEffect to fetch orders when the component mounts
+  useEffect(() => {
+    const fetchOrders = async () => {
+      setLoading(true); // Set loading state to true before fetch
+      setError(null); // Clear any previous errors
+
+      try {
+        const fetchedOrders = await getOrders();
+        setOrders(fetchedOrders); // Update orders state
+      } catch (err) {
+        setError("Failed to load orders."); // Set error if fetching fails
+      } finally {
+        setLoading(false); // Set loading state to false after fetch is done
+      }
+    };
+
+    fetchOrders();
+  }, []); // Empty dependency array means this will run once on mount
+
+  if (loading) {
+    return <div>Loading orders...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div>
-      <div>
-        <h1 className="text-xl font-bold mb-4">Orders</h1>
-        {/* Pass the fetched customer data to the CustomersTable component as a prop */}
-        <OrdersTable initialOrders={orders} />
-      </div>
+      <h1 className="text-xl font-bold mb-4">Orders</h1>
+      <OrdersTable initialOrders={orders} />
     </div>
   );
 };

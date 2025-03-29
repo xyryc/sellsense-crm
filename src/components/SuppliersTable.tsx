@@ -45,12 +45,9 @@ export default function SuppliersTable({
   const handleDelete = async (id: string) => {
     setIsDeleting(id);
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/suppliers/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`/api/suppliers/${id}`, {
+        method: "DELETE",
+      });
 
       if (!response.ok) {
         throw new Error("Failed to delete suppliers");

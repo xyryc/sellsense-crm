@@ -49,7 +49,7 @@ export default function OrdersTable({ initialOrders }: OrdersTableProps) {
   const handleDelete = async (id: string) => {
     setIsDeleting(id);
     try {
-      const response = await fetch(`http://localhost:3000/api/orders/${id}`, {
+      const response = await fetch(`/api/orders/${id}`, {
         method: "DELETE",
       });
 

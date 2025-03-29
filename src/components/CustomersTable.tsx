@@ -35,12 +35,9 @@ export default function CustomersTable({
   const handleDelete = async (id: string) => {
     setIsDeleting(id);
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/customers/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`/api/customers/${id}`, {
+        method: "DELETE",
+      });
 
       if (!response.ok) {
         throw new Error("Failed to delete customer");

@@ -45,7 +45,7 @@ export default function ContactsTable({
   const handleDelete = async (id: string) => {
     setIsDeleting(id);
     try {
-      const response = await fetch(`http://localhost:3000/api/contacts/${id}`, {
+      const response = await fetch(`/api/contacts/${id}`, {
         method: "DELETE",
       });
 
