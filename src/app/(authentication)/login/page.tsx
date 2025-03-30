@@ -1,7 +1,6 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 
@@ -18,7 +17,18 @@ const LoginPage = () => {
   } = useForm<LoginFormData>();
 
   const onSubmit = (data: LoginFormData) => {
-    console.log("Login Data:", data);
+    const { email, password } = data!;
+    if (!email || !password) return alert("Invalid Credentials");
+
+    if (
+      email !== process.env.NEXT_PUBLIC_ADMIN_EMAIL ||
+      password !== process.env.NEXT_PUBLIC_ADMIN_PASSWORD
+    )
+      return alert("Wrong Credentials Please enter a valid Email or Password");
+
+    signIn("credentials", {
+      callbackUrl: `${window.location.origin}/`,
+    });
   };
 
   return (
@@ -52,26 +62,16 @@ const LoginPage = () => {
           </div>
 
           <button
-            onClick={() =>
-              signIn("credentials", {
-                callbackUrl: `${window.location.origin}/dashboard`,
-              })
-            }
             type="submit"
             className="w-full border bg-blue-100 text-blue-600 border-blue-200 font-bold p-2 rounded"
           >
             Login
           </button>
         </form>
-        <h1 className="mt-4  text-slate-500 text-base">
-          Dont have an account?{" "}
-          <Link href="/register" className="text-green-500 font-medium">
-            Create an Account
-          </Link>
-        </h1>
+
         <div className="border-b-2 mt-8"></div>
         <h1 className="font-bold mt-8 text-center text-slate-500">
-          Or Login Using
+          Login Using
         </h1>
         <button
           onClick={() =>
