@@ -1,5 +1,3 @@
-import Navbar from "@/components/Navbar";
-import Sidebar from "@/components/Sidebar";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -26,22 +24,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex h-screen w-full">
-          <Sidebar />
-          <div className="flex flex-col flex-1">
-            <Navbar />
-            <main className="p-6 bg-gray-100 dark:bg-gray-900 flex-1">
-              {children}
-              <Toaster></Toaster>
-            </main>
-          </div>
-        </div>
+        {children}
       </body>
     </html>
   );

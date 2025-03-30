@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from "react";
 import OrdersTable from "@/components/OrdersTable";
-import { Orders as OrdersType } from "../../types";
+import { Orders as OrdersType } from "../../../types";
 
 // Async function to fetch orders data from the API
 async function getOrders(): Promise<OrdersType[]> {
   try {
-    const res = await fetch('/api/orders');
+    const res = await fetch("/api/orders");
     if (!res.ok) {
       throw new Error("Failed to fetch orders");
     }

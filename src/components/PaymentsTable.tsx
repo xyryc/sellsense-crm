@@ -1,25 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Payments } from "../types";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Search, Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
 
-interface PaymentsTableProps {
-  initialPayments: Payments[];
-}
-
-export default function PaymentTable({
-  initialPayments: initialPayments,
-}: PaymentsTableProps) {
+export default function PaymentTable() {
   const [search, setSearch] = useState("");
-  const [payments, setPayments] = useState<Payments[]>(initialPayments);
+  const [payments, setPayments] = useState<Payments[]>([]);
   const [sortPayments, setSortPayments] = useState<"newest" | "oldest">(
     "newest"
   );
   const [isDeleting, setIsDeleting] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // function to fetch payments data from "api/payments"
+  async function fetchData() {
+    const res = await fetch("/api/payments");
+    const data = await res.json();
+    setPayments(data.data); // Store the fetched payments in state
+  }
 
   const filteredPayments = payments.filter(
     (payment) =>

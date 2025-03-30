@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from "react";
 import SuppliersTable from "@/components/SuppliersTable";
-import { Suppliers as SuppliersProps } from "../../types";
+import { Suppliers as SuppliersProps } from "../../../types";
 
 // Async function to fetch suppliers data from the API
 async function getSuppliers(): Promise<SuppliersProps[]> {
   try {
-    const res = await fetch('/api/suppliers');
+    const res = await fetch("/api/suppliers");
     if (!res.ok) {
       throw new Error("Failed to fetch suppliers");
     }

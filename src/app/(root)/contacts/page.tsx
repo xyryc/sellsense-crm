@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from "react";
 import ContactsTable from "@/components/ContactsTable";
-import { Contacts as ContactsProps } from "../../types";
+import { Contacts as ContactsProps } from "../../../types";
 
 // Async function to fetch contacts data from the API
 async function getContacts(): Promise<ContactsProps[]> {
   try {
-    const res = await fetch('/api/contacts');
+    const res = await fetch("/api/contacts");
     if (!res.ok) {
       throw new Error("Failed to fetch contacts");
     }
