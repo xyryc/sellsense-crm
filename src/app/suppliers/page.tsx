@@ -1,23 +1,61 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import SuppliersTable from "@/components/SuppliersTable";
-import { Contacts as SuppliersProps } from "../../types";
-// Async function to fetch customer data from the API
+import { Suppliers as SuppliersProps } from "../../types";
+
+// Async function to fetch suppliers data from the API
 async function getSuppliers(): Promise<SuppliersProps[]> {
-  const res = await fetch("http://localhost:3000/api/suppliers");
-  const data = await res.json();
-  console.log(data.data);
-  return data.data;
+  try {
+    const res = await fetch('/api/suppliers');
+    if (!res.ok) {
+      throw new Error("Failed to fetch suppliers");
+    }
+    const data = await res.json();
+    console.log("Fetched suppliers: ", data.data); // Log the fetched data for debugging
+    return data.data;
+  } catch (error) {
+    console.error("Error fetching suppliers:", error);
+    return []; // Return an empty array in case of error
+  }
 }
 
-const Suppliers = async () => {
-  const suppliers = await getSuppliers();
-  console.log("inside payments =====> ", suppliers);
+const Suppliers = () => {
+  const [suppliers, setSuppliers] = useState<SuppliersProps[]>([]); // State to store suppliers
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState<string | null>(null); // Error state
+
+  // useEffect to fetch suppliers when the component mounts
+  useEffect(() => {
+    const fetchSuppliers = async () => {
+      setLoading(true); // Set loading state to true before fetching
+      setError(null); // Clear previous errors
+
+      try {
+        const fetchedSuppliers = await getSuppliers();
+        setSuppliers(fetchedSuppliers); // Update the suppliers state
+      } catch (err) {
+        setError("Failed to load suppliers."); // Set error state if fetching fails
+      } finally {
+        setLoading(false); // Set loading state to false after fetching
+      }
+    };
+
+    fetchSuppliers();
+  }, []); // Empty dependency array ensures this runs only once when the component mounts
+
+  if (loading) {
+    return <div>Loading suppliers...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div>
-      <div>
-        <h1 className="text-xl font-bold mb-4">Supplies</h1>
-        {/* Pass the fetched customer data to the CustomersTable component as a prop */}
-        <SuppliersTable initialSuppliers={suppliers} />
-      </div>
+      <h1 className="text-xl font-bold mb-4">Suppliers</h1>
+      <SuppliersTable initialSuppliers={suppliers} />
     </div>
   );
 };

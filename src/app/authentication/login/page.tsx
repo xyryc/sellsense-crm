@@ -55,7 +55,9 @@ const LoginPage = () => {
 
           <button
             onClick={() =>
-              signIn("credentials", { callbackUrl: "http://localhost:3000" })
+              signIn("credentials", {
+                callbackUrl: `${window.location.origin}/dashboard`,
+              })
             }
             type="submit"
             className="w-full border bg-blue-100 text-blue-600 border-blue-200 font-bold p-2 rounded"
@@ -78,7 +80,9 @@ const LoginPage = () => {
         </h1>
         <button
           onClick={() =>
-            signIn("google", { callbackUrl: "http://localhost:3000" })
+            signIn("google", {
+              callbackUrl: `${window.location.origin}/dashboard`,
+            })
           }
           className="text-3xl ml-[190px] mt-2"
         >

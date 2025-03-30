@@ -30,9 +30,13 @@ export default function OrdersTable({ initialOrders }: OrdersTableProps) {
   const sortedOrders = filteredOrders.sort((a, b) => {
     switch (sortOrder) {
       case "newest":
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
       case "oldest":
-        return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+        return (
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        );
       case "totalPriceAsc":
         return a.totalPrice - b.totalPrice;
       case "totalPriceDesc":
@@ -45,7 +49,7 @@ export default function OrdersTable({ initialOrders }: OrdersTableProps) {
   const handleDelete = async (id: string) => {
     setIsDeleting(id);
     try {
-      const response = await fetch(`http://localhost:3000/api/orders/${id}`, {
+      const response = await fetch(`/api/orders/${id}`, {
         method: "DELETE",
       });
 
@@ -86,7 +90,13 @@ export default function OrdersTable({ initialOrders }: OrdersTableProps) {
             id="sort"
             value={sortOrder}
             onChange={(e) =>
-              setSortOrder(e.target.value as "newest" | "oldest" | "totalPriceAsc" | "totalPriceDesc")
+              setSortOrder(
+                e.target.value as
+                  | "newest"
+                  | "oldest"
+                  | "totalPriceAsc"
+                  | "totalPriceDesc"
+              )
             }
             className="border p-2 rounded dark:bg-gray-700"
           >

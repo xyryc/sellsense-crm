@@ -1,4 +1,3 @@
-
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -70,7 +69,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session, user }) {
       if (user) {
-        session.user.id = user.id;
+        session.user.id = Number(user.id);
         session.user.email = user.email;
       }
       return session;
