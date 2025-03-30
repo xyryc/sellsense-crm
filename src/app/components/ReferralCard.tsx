@@ -12,22 +12,22 @@ export default function ReferralCard({ referralData }: ReferralCardProps) {
   const referralLink = `${baseUrl}?ref=${referralData.referralCode}`;
 
   return (
-    <div className="border rounded-lg p-6 shadow-sm bg-white">
+    <div className="border rounded-lg p-6 shadow-sm">
       <h3 className="text-xl font-semibold mb-4">Your Referral Details</h3>
       
       <div className="space-y-4">
         <div>
           <p className="text-sm text-gray-500 mb-1">Referral Code</p>
           <div className="flex items-center">
-            <code className="bg-gray-100 px-3 py-1 rounded">{referralData.referralCode}</code>
+            <code className="bg-gray-200 dark:bg-gray-600 px-3 py-1 rounded">{referralData.referralCode}</code>
             <CopyButton text={referralData.referralCode} />
           </div>
         </div>
         
         <div>
-          <p className="text-sm text-gray-500 mb-1">Referral Link</p>
+          <p className="text-sm text-gray-500 dark:text-gray-200 mb-1">Referral Link</p>
           <div className="flex items-center">
-            <code className="bg-gray-100 px-3 py-1 rounded text-sm truncate max-w-xs">
+            <code className="bg-gray-200 dark:bg-gray-600 px-3 py-1 rounded text-sm truncate max-w-xs">
               {referralLink}
             </code>
             <CopyButton text={referralLink} />
@@ -35,7 +35,7 @@ export default function ReferralCard({ referralData }: ReferralCardProps) {
         </div>
         
         <div>
-          <p className="text-sm text-gray-500 mb-1">Reward Points</p>
+          <p className="text-sm text-gray-500 dark:text-gray-200 mb-1">Reward Points</p>
           <p className="font-medium">{referralData.rewardPoints}</p>
         </div>
         

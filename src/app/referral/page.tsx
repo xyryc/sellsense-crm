@@ -77,9 +77,9 @@ export default function ReferralPage() {
       )}
       
       {!referralData ? (
-        <div className="bg-white p-6 rounded-lg shadow-sm border mb-8">
+        <div className="p-6 rounded-lg shadow-md border mb-8">
           <h2 className="text-xl font-semibold mb-4">Generate Your Referral Code</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 dark:text-gray-300 mb-6">
             Generate a unique referral code to share with friends. You'll earn 50 points for each successful referral!
           </p>
           <Button 
@@ -106,17 +106,17 @@ export default function ReferralPage() {
       <div className="mt-12">
         <h2 className="text-xl font-semibold mb-4">How It Works</h2>
         <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-white p-5 rounded-lg shadow-sm border">
+          <div className="p-5 rounded-lg shadow-sm border">
             <div className="font-bold text-blue-500 text-xl mb-2">1.</div>
             <h3 className="font-medium mb-2">Generate Your Code</h3>
             <p className="text-gray-600 text-sm">Click the button to create your unique referral code.</p>
           </div>
-          <div className="bg-white p-5 rounded-lg shadow-sm border">
+          <div className="p-5 rounded-lg shadow-sm border">
             <div className="font-bold text-blue-500 text-xl mb-2">2.</div>
             <h3 className="font-medium mb-2">Share With Friends</h3>
             <p className="text-gray-600 text-sm">Send your referral code or link to friends and invite them to join.</p>
           </div>
-          <div className="bg-white p-5 rounded-lg shadow-sm border">
+          <div className="p-5 rounded-lg shadow-sm border">
             <div className="font-bold text-blue-500 text-xl mb-2">3.</div>
             <h3 className="font-medium mb-2">Earn Rewards</h3>
             <p className="text-gray-600 text-sm">Get 50 points for each friend who signs up using your code.</p>

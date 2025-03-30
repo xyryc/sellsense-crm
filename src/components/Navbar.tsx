@@ -1,6 +1,5 @@
 "use client"
 import { Bell, LogOut, MessageCircle, Moon, Search, Sun, User } from "lucide-react";
-
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
@@ -16,25 +15,26 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 
 export default function Navbar() {
-  const [darkMode, setDarkMode] = useState(true); // Default to dark mode
+  // Check if there's a saved theme in localStorage and set the initial theme accordingly
+  const savedTheme = localStorage.getItem("theme");
+  const [darkMode, setDarkMode] = useState(savedTheme === "dark"); // Set initial theme from localStorage or default to dark
 
-  // Set dark mode by default on initial load
+  // Set dark mode based on saved preference on initial load
   useEffect(() => {
-    document.documentElement.classList.add("dark"); // Apply dark class by default
-    localStorage.setItem("theme", "dark"); // Save preference in localStorage
-  }, []);
-
-  // Toggle dark mode and save preference to local storage
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    if (!darkMode) {
+    if (darkMode) {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
     } else {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
+  }, [darkMode]);
+
+  // Toggle dark mode and save preference to localStorage
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
   };
+
   return (
     <div className="h-16 py-3 md:py-0 bg-white dark:bg-gray-800 flex items-center justify-between px-6 md:px-2 shadow-md">
       {/* search box */}

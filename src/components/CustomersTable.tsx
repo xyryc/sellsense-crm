@@ -5,6 +5,7 @@ import { Customer } from "../types";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Search, Trash2 } from "lucide-react";
+import toast from "react-hot-toast";
 
 export default function CustomersTable() {
   const [search, setSearch] = useState("");
@@ -51,10 +52,10 @@ export default function CustomersTable() {
 
       // Remove the customer from the local state
       setCustomers(customers.filter((customer) => customer._id !== id));
-      alert("Customer deleted successfully");
+      toast.success("Customer deleted successfully");
     } catch (error) {
       console.error("Error deleting customer:", error);
-      alert("Failed to delete customer");
+      toast.error("Failed to delete customer");
     } finally {
       setIsDeleting(null);
     }
