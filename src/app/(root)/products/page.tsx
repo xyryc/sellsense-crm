@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from "react";
 import ProductsTable from "@/components/ProductsTable";
-import { Products as ProductsProps } from "../../types";
+import { Products as ProductsProps } from "../../../types";
 
 // Async function to fetch products data from the API
 async function getProducts(): Promise<ProductsProps[]> {
   try {
-    const res = await fetch('/api/products');
+    const res = await fetch("/api/products");
     if (!res.ok) {
       throw new Error("Failed to fetch products");
     }
