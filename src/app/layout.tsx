@@ -3,6 +3,7 @@ import Sidebar from "@/components/Sidebar";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,6 +38,7 @@ export default function RootLayout({
             <Navbar />
             <main className="p-6 bg-gray-100 dark:bg-gray-900 flex-1">
               {children}
+              <Toaster></Toaster>
             </main>
           </div>
         </div>

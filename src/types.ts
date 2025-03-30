@@ -95,3 +95,17 @@ export interface ReferralData {
     status: 'pending' | 'completed';
     date: string;
   }
+
+//   loyalty
+export interface LoyaltyHistoryItem {
+    action: string;
+    points: number;
+    date: string;
+  }
+  
+  export interface LoyaltyData {
+    userId: string;
+    points: number;
+    history: LoyaltyHistoryItem[];
+  }
+  

@@ -5,6 +5,7 @@ import { Payments } from "../types";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Search, Trash2 } from "lucide-react";
+import toast from "react-hot-toast";
 
 interface PaymentsTableProps {
   initialPayments: Payments[];
@@ -54,10 +55,10 @@ export default function PaymentTable({
       }
 
       setPayments(payments.filter((payment) => payment._id !== id));
-      alert("Payment deleted successfully");
+      toast.success("Payment deleted successfully");
     } catch (error) {
       console.error("Error deleting payment:", error);
-      alert("Failed to delete payment");
+      toast.error("Failed to delete payment");
     } finally {
       setIsDeleting(null);
     }

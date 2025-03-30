@@ -5,6 +5,7 @@ import { Contacts } from "../types";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Search, Trash2 } from "lucide-react";
+import toast from "react-hot-toast";
 
 interface ContactsTableProps {
   initialContacts: Contacts[];
@@ -54,10 +55,10 @@ export default function ContactsTable({
       }
 
       setContacts(contacts.filter((contact) => contact._id !== id));
-      alert("Supplier deleted successfully");
+      toast.success("Contact deleted successfully");
     } catch (error) {
-      console.error("Error deleting supplier:", error);
-      alert("Failed to delete supplier");
+      console.error("Error deleting contact:", error);
+      toast.error("Failed to delete contact");
     } finally {
       setIsDeleting(null);
     }
