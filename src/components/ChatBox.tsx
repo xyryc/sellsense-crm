@@ -1,6 +1,7 @@
 "use client";
 import { useState } from 'react';
 import { Button } from './ui/button';
+import { marked } from 'marked'; // Import the marked library to parse markdown
 
 const ChatBox = () => {
   const [message, setMessage] = useState('');
@@ -29,10 +30,23 @@ const ChatBox = () => {
         throw new Error(data.error || 'Unknown API error');
       }
 
-      setChatHistory([...newChatHistory, { sender: 'Gemini', text: data.message || 'No response' }]);
+      const formattedMessage = data.message
+        ? marked(data.message) // Parse markdown into HTML
+        : 'No response received.';
+
+      // Ensure the formattedMessage is a string
+      const finalMessage = typeof formattedMessage === 'string' ? formattedMessage : '';
+
+      setChatHistory([
+        ...newChatHistory,
+        { sender: 'Gemini', text: finalMessage }, // Set the formatted message correctly
+      ]);
     } catch (error) {
       console.error('Error sending message:', error); // ✅ Debugging
-      setChatHistory([...newChatHistory, { sender: 'Gemini', text: 'Error fetching response' }]);
+      setChatHistory([
+        ...newChatHistory,
+        { sender: 'Gemini', text: 'Error fetching response' },
+      ]);
     } finally {
       setLoading(false);
     }
@@ -53,9 +67,10 @@ const ChatBox = () => {
           <div
             key={index}
             className={`p-2 max-w-[75%] rounded-md ${chat.sender === 'You' ? 'self-end bg-blue-500 text-white' : 'self-start bg-gray-700'}`}
-          >
-            <strong>SellSense:</strong> {chat.text}
-          </div>
+            dangerouslySetInnerHTML={{
+              __html: chat.sender === 'Gemini' ? chat.text : `<strong>${chat.sender}:</strong> ${chat.text}`,
+            }}
+          />
         ))}
       </div>
 
