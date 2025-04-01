@@ -1,55 +1,99 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { marked } from "marked"; // Import the marked library to parse markdown
 
 const ChatBox = () => {
   const [message, setMessage] = useState("");
-  const [chatHistory, setChatHistory] = useState<{ sender: string; text: string }[]>([]);
+  const [chatHistory, setChatHistory] = useState<
+    { sender: string; text: string }[]
+  >([]);
   const [loading, setLoading] = useState(false);
 
+  // Load chat history from localStorage on component mount
+  useEffect(() => {
+    const savedChats = localStorage.getItem("chatHistory");
+    if (savedChats) {
+      setChatHistory(JSON.parse(savedChats));
+    }
+  }, []);
+
+  // Function to save chat history to localStorage
+  const saveChatHistory = (chats: { sender: string; text: string }[]) => {
+    localStorage.setItem("chatHistory", JSON.stringify(chats));
+  };
+
   const sendMessage = async () => {
-    if (!message.trim()) return; // Prevent sending empty messages
+    if (!message.trim()) return;
 
     const newChatHistory = [...chatHistory, { sender: "You", text: message }];
-    setChatHistory(newChatHistory); // Update chat history state
-    setMessage(""); // Clear input field
-    setLoading(true); // Show loading indicator
+    setChatHistory(newChatHistory);
+    setMessage("");
+    setLoading(true);
+    saveChatHistory(newChatHistory);
+
+    // Show a typing animation instead of text
+    const thinkingMessage = {
+      sender: "Gemini",
+      text: "<div class='typing-indicator'><span></span><span></span><span></span></div>",
+    };
+    setChatHistory([...newChatHistory, thinkingMessage]);
 
     try {
       let response;
 
-      // Send a normal or short explanation request based on the message
       if (message.toLowerCase().includes("explain shortly")) {
-        const lastResponse = chatHistory.find(chat => chat.sender === "Gemini");
-        if (!lastResponse) throw new Error("No previous response found for short explanation.");
+        const lastResponse = chatHistory.find(
+          (chat) => chat.sender === "Gemini"
+        );
+        if (!lastResponse)
+          throw new Error("No previous response found for short explanation.");
 
         response = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: `Please explain this shortly: ${lastResponse.text}` }),
+          body: JSON.stringify({
+            message: `Please explain this shortly: ${lastResponse.text}`,
+          }),
         });
       } else {
         response = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message }),  // Send original message
+          body: JSON.stringify({ message }),
         });
       }
 
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Unknown API error");
 
-      const formattedMessage = data.message ? marked(data.message) : "No response received.";
-      const finalMessage = typeof formattedMessage === "string" ? formattedMessage : "";
+      const formattedMessage = data.message
+        ? marked(data.message)
+        : "No response received.";
+      const finalMessage =
+        typeof formattedMessage === "string" ? formattedMessage : "";
 
-      setChatHistory([...newChatHistory, { sender: "Gemini", text: finalMessage }]);
+      // Replace typing animation with actual response
+      const updatedChatHistory = [
+        ...newChatHistory,
+        { sender: "Gemini", text: finalMessage },
+      ];
+      setChatHistory(updatedChatHistory);
+      saveChatHistory(updatedChatHistory);
     } catch (error) {
       console.error("Error sending message:", error);
-      setChatHistory([...newChatHistory, { sender: "Gemini", text: "Error fetching response" }]);
+      setChatHistory([
+        ...newChatHistory,
+        { sender: "Gemini", text: "Error fetching response" },
+      ]);
     } finally {
       setLoading(false);
     }
+  };
+
+  const clearChat = () => {
+    setChatHistory([]); // Clear chat state
+    localStorage.removeItem("chatHistory"); // Remove from localStorage
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -59,28 +103,35 @@ const ChatBox = () => {
   };
 
   return (
-    <div className="">
+    <div className="flex flex-col gap-4">
       {/* Chat Messages */}
-      <div className="flex flex-col gap-3 overflow-auto h-[60vh] p-3 border rounded-lg bg-slate-900">
+      <div className="flex flex-col gap-3 overflow-auto h-[60vh] p-3 border rounded-lg bg-gray-200 dark:bg-slate-900">
         {chatHistory.map((chat, index) => (
           <div
             key={index}
-            className={`p-2 max-w-[75%] rounded-md ${chat.sender === "You" ? "self-end bg-blue-500 text-white" : "self-start bg-gray-700"}`}
+            className={`p-2 max-w-[75%] rounded-md ${
+              chat.sender === "You"
+                ? "self-end bg-blue-500 text-white"
+                : "self-start bg-gray-300 dark:bg-gray-700"
+            }`}
             dangerouslySetInnerHTML={{
-              __html: chat.sender === "Gemini" ? chat.text : `<strong>${chat.sender}:</strong> ${chat.text}`,
+              __html:
+                chat.sender === "Gemini"
+                  ? chat.text
+                  : `<strong>${chat.sender}:</strong> ${chat.text}`,
             }}
           />
         ))}
       </div>
 
-      {/* Input Field */}
-      <div className="flex gap-2 mt-4">
+      {/* Input Field & Buttons */}
+      <div className="flex items-center gap-2">
         <input
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={handleKeyDown} // Add onKeyDown to listen for Enter key press
-          className="p-2 w-full border rounded-md dark:bg-gray-800"
+          onKeyDown={handleKeyDown} // Listen for Enter key
+          className="p-[6px] w-full border rounded-md dark:bg-gray-800"
           placeholder="Type your message..."
           disabled={loading}
         />
@@ -90,6 +141,12 @@ const ChatBox = () => {
           disabled={loading}
         >
           {loading ? "..." : "Send"}
+        </Button>
+        <Button
+          onClick={clearChat}
+          className="bg-red-500 text-white rounded-sm"
+        >
+          Clear Chat
         </Button>
       </div>
     </div>
