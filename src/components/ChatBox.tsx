@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { marked } from "marked"; // Import the marked library to parse markdown
+import { Loader2, Send, Trash } from "lucide-react";
 
 const ChatBox = () => {
   const [message, setMessage] = useState("");
@@ -105,7 +106,7 @@ const ChatBox = () => {
   return (
     <div className="flex flex-col gap-4">
       {/* Chat Messages */}
-      <div className="flex flex-col gap-3 overflow-auto h-[60vh] p-3 border rounded-lg bg-gray-200 dark:bg-slate-900">
+      <div className="flex flex-col gap-3 overflow-auto h-[60vh] lg:h-[70vh] p-3 border rounded-lg bg-gray-200 dark:bg-slate-900">
         {chatHistory.map((chat, index) => (
           <div
             key={index}
@@ -115,10 +116,7 @@ const ChatBox = () => {
                 : "self-start bg-gray-300 dark:bg-gray-700"
             }`}
             dangerouslySetInnerHTML={{
-              __html:
-                chat.sender === "Gemini"
-                  ? chat.text
-                  : `<strong>${chat.sender}:</strong> ${chat.text}`,
+              __html: chat.sender === "Gemini" ? chat.text : chat.text, // No "You:"
             }}
           />
         ))}
@@ -140,13 +138,17 @@ const ChatBox = () => {
           className="bg-blue-500 text-white rounded-sm"
           disabled={loading}
         >
-          {loading ? "..." : "Send"}
+          {loading ? (
+            <Loader2 className="animate-spin w-5 h-5" />
+          ) : (
+            <Send className="w-5 h-5" />
+          )}
         </Button>
         <Button
           onClick={clearChat}
           className="bg-red-500 text-white rounded-sm"
         >
-          Clear Chat
+          <Trash />
         </Button>
       </div>
     </div>
