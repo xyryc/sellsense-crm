@@ -5,6 +5,7 @@ import {
   Contact,
   CreditCard,
   Gift,
+  Headset,
   Home,
   Menu,
   Package,
@@ -32,7 +33,7 @@ const routes = [
   { name: "Inventory", path: "/inventory", icon: <Package size={20} /> },
   { name: "Loyalty", path: "/loyalty", icon: <Home size={20} /> },
   { name: "Referral", path: "/referral", icon: <Home size={20} /> },
-  { name: "Customer Support", path: "/customer-support", icon: <Home size={20} /> },
+  { name: "Support", path: "/customer-support", icon: <Headset size={20} /> },
   { name: "Settings", path: "/settings", icon: <Settings size={20} /> },
 ];
 

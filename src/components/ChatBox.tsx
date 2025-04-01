@@ -5,80 +5,53 @@ import { marked } from "marked"; // Import the marked library to parse markdown
 
 const ChatBox = () => {
   const [message, setMessage] = useState("");
-  const [chatHistory, setChatHistory] = useState<
-    { sender: string; text: string }[]
-  >([]);
+  const [chatHistory, setChatHistory] = useState<{ sender: string; text: string }[]>([]);
   const [loading, setLoading] = useState(false);
 
   const sendMessage = async () => {
     if (!message.trim()) return; // Prevent sending empty messages
-  
-    // Add user's message to chat history immediately
+
     const newChatHistory = [...chatHistory, { sender: "You", text: message }];
-    setChatHistory(newChatHistory);  // Update chat history state
-    setMessage("");  // Clear input field
+    setChatHistory(newChatHistory); // Update chat history state
+    setMessage(""); // Clear input field
     setLoading(true); // Show loading indicator
-  
+
     try {
       let response;
-  
-      // If user asks for a short explanation
+
+      // Send a normal or short explanation request based on the message
       if (message.toLowerCase().includes("explain shortly")) {
-        // Take the last bot's response and include it as context for a short explanation request
         const lastResponse = chatHistory.find(chat => chat.sender === "Gemini");
-        
-        if (!lastResponse) {
-          throw new Error("No previous response found for short explanation.");
-        }
-  
-        // Send the request for a short explanation
+        if (!lastResponse) throw new Error("No previous response found for short explanation.");
+
         response = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: `Please explain this shortly in 5 lines: ${lastResponse.text}` }),
+          body: JSON.stringify({ message: `Please explain this shortly: ${lastResponse.text}` }),
         });
       } else {
-        // Otherwise, it's a normal message
         response = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ message }),  // Send original message
         });
       }
-  
+
       const data = await response.json();
-      console.log("API Response:", data); // ✅ Debugging
-  
-      if (!response.ok) {
-        throw new Error(data.error || "Unknown API error");
-      }
-  
-      const formattedMessage = data.message
-        ? marked(data.message) // Parse markdown into HTML
-        : "No response received.";
-  
-      // Ensure the formattedMessage is a string
-      const finalMessage =
-        typeof formattedMessage === "string" ? formattedMessage : "";
-  
-      setChatHistory([
-        ...newChatHistory,
-        { sender: "Gemini", text: finalMessage }, // Set the formatted message correctly
-      ]);
+      if (!response.ok) throw new Error(data.error || "Unknown API error");
+
+      const formattedMessage = data.message ? marked(data.message) : "No response received.";
+      const finalMessage = typeof formattedMessage === "string" ? formattedMessage : "";
+
+      setChatHistory([...newChatHistory, { sender: "Gemini", text: finalMessage }]);
     } catch (error) {
-      console.error("Error sending message:", error); // ✅ Debugging
-      setChatHistory([
-        ...newChatHistory,
-        { sender: "Gemini", text: "Error fetching response" },
-      ]);
+      console.error("Error sending message:", error);
+      setChatHistory([...newChatHistory, { sender: "Gemini", text: "Error fetching response" }]);
     } finally {
       setLoading(false);
     }
   };
-  
-  
 
-  // Function to handle Enter key press
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !loading) {
       sendMessage();
@@ -88,20 +61,13 @@ const ChatBox = () => {
   return (
     <div className="">
       {/* Chat Messages */}
-      <div className="flex flex-col gap-3 overflow-auto h-[60vh] p-3 border rounded-lg">
+      <div className="flex flex-col gap-3 overflow-auto h-[60vh] p-3 border rounded-lg bg-slate-900">
         {chatHistory.map((chat, index) => (
           <div
             key={index}
-            className={`p-2 max-w-[75%] rounded-md ${
-              chat.sender === "You"
-                ? "self-end bg-blue-500 text-white"
-                : "self-start bg-gray-700"
-            }`}
+            className={`p-2 max-w-[75%] rounded-md ${chat.sender === "You" ? "self-end bg-blue-500 text-white" : "self-start bg-gray-700"}`}
             dangerouslySetInnerHTML={{
-              __html:
-                chat.sender === "Gemini"
-                  ? chat.text
-                  : `<strong>${chat.sender}:</strong> ${chat.text}`,
+              __html: chat.sender === "Gemini" ? chat.text : `<strong>${chat.sender}:</strong> ${chat.text}`,
             }}
           />
         ))}
