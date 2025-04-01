@@ -1,5 +1,14 @@
-"use client"
-import { Bell, LogOut, MessageCircle, Moon, Search, Sun, User } from "lucide-react";
+"use client";
+import {
+  Bell,
+  Headset,
+  LogOut,
+  MessageCircle,
+  Moon,
+  Search,
+  Sun,
+  User,
+} from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
@@ -60,6 +69,9 @@ export default function Navbar() {
         </button>
         {/* Message icon */}
         <MessageCircle />
+        <Link href={"/customer-support"}>
+          <Headset />
+        </Link>
         {/* Notification Bell */}
         <Bell />
 
@@ -79,11 +91,16 @@ export default function Navbar() {
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="mr-2">
-            <DropdownMenuLabel className="text-lg">My Account</DropdownMenuLabel>
+            <DropdownMenuLabel className="text-lg">
+              My Account
+            </DropdownMenuLabel>
             <DropdownMenuSeparator />
             {/* My Profile */}
             <DropdownMenuItem className="hover:scale-105 hover:translate-x-1 transition-all duration-300">
-              <Link href={"/my-profile"} className="flex items-center gap-1 text-lg">
+              <Link
+                href={"/my-profile"}
+                className="flex items-center gap-1 text-lg"
+              >
                 <User /> My Profile
               </Link>
             </DropdownMenuItem>
