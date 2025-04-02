@@ -1,18 +1,24 @@
 import { doSocialLogin } from "@/action/auth";
 import React from "react";
+import { FcGoogle } from "react-icons/fc";
 
 const SocialLoginButtons = () => {
   return (
-    <form action={doSocialLogin}>
-      <button
-        type="submit"
-        className="m-1 rounded-md bg-pink-400 p-1 text-lg text-white"
-        name="action"
-        value="google"
-      >
-        Sign In with Google
-      </button>
-    </form>
+    <>
+      <h1 className="font-bold text-center mt-4 text-slate-500">
+        Or, Login Using
+      </h1>
+      <form action={doSocialLogin}>
+        <button
+          type="submit"
+          name="action"
+          value="google"
+          className="text-3xl ml-[190px] mt-2"
+        >
+          <FcGoogle />
+        </button>
+      </form>
+    </>
   );
 };
 

@@ -8,33 +8,36 @@ const LoginForm = () => {
   return (
     <>
       <div className="text-red-500 text-xl">{error}</div>
-      <form
-        className="my-5 flex flex-col items-center rounded-md border border-gray-200 p-4"
-        onSubmit={handleFormSubmit}
-      >
+      <form className="space-y-4" onSubmit={handleFormSubmit}>
         <div className="flex-between my-2">
-          <label htmlFor="email">Email Address</label>
+          <label htmlFor="email" className="block font-medium">
+            Email
+          </label>
           <input
             type="email"
             id="email"
             name="email"
-            className="mx-2 rounded-md border border-gray-500"
+            className="w-full p-2 border rounded"
+            placeholder="Enter your Email"
           />
         </div>
         <div className="flex-between my-2">
-          <label htmlFor="password">Password Address</label>
+          <label htmlFor="password" className="block font-medium">
+            Password
+          </label>
           <input
             type="password"
             id="password"
             name="password"
-            className="mx-2 rounded-md border border-gray-500"
+            className="w-full p-2 border rounded"
+            placeholder="Enter your Password"
           />
         </div>
         <button
           type="submit"
-          className="mt-4 flex w-36 items-center justify-center rounded-md bg-orange-300"
+          className="w-full border bg-blue-100 text-blue-600 border-blue-200 font-bold p-2 rounded"
         >
-          Credential Login
+          Login
         </button>
       </form>
     </>
