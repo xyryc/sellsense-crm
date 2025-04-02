@@ -16,7 +16,7 @@ const useLoginHandler = () => {
       if (!!response.error) {
         setError(response.error.message);
       } else {
-        router.push("/profile");
+        router.push("/");
       }
     } catch (error) {
       console.error(error);
