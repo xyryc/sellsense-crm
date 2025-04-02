@@ -1,8 +1,7 @@
 "use client"
 
+import { CreditCard, ShoppingBag, Truck, UsersRound } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Bar, BarChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-
 
 interface Order {
     totalPrice: number;
@@ -11,6 +10,7 @@ interface Order {
 const OverallStatsChart = () => {
     const [totalOrders, setTotalOrders] = useState<Order[]>([]);
     const [totalProducts, setTotalProducts] = useState([]);
+    const [totalCustomers, setTotalCustomers] = useState([])
 
     useEffect(() => {
         const fetchAllOrders = async () => {
@@ -33,40 +33,75 @@ const OverallStatsChart = () => {
             }
         }
 
+        const fetchAllCustomers = async () => {
+            try {
+                const response = await fetch(`/api/customers`)
+                const result = await response.json()
+                setTotalCustomers(result?.data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
         fetchAllOrders()
         fetchAllProducts()
+        fetchAllCustomers()
     }, [])
 
-    // total price from orders
+    // total price from orders / revenue
     const totalPrice = totalOrders.reduce((sum, order) => sum + (order.totalPrice || 0), 0);
 
-    // data for the chart
-    const chartData = [
-        { name: "Total Orders", count: totalOrders.length },
-        { name: "Total Products", count: totalProducts.length },
-    ];
 
     return (
-        <div className="p-4">
-            <div className="flex justify-between mb-4">
-                <h2 className="text-xl font-semibold mb-4">
-                    Overall Statistics
-                </h2>
+        <div className="px-4 grid grid-cols-2 xl:grid-cols-4 gap-7">
+            {/* stat - 1 */}
+            <div className="p-6 dark:bg-white/10 sm:inline-flex items-center gap-6 rounded-xl border drop-shadow-md">
+                <div className="p-4 text-green-600 bg-green-200 rounded-full inline-flex">
+                    <CreditCard />
+                </div>
 
-                <h2 className="text-xl font-semibold mb-4 text-right">
-                    Revenue: ${totalPrice}
-                </h2>
+                <div>
+                    <p className="font-bold text-xl">${Math.floor(totalPrice)}+</p>
+                    <p className="text-sm tracking-wide">Revenue</p>
+                </div>
             </div>
 
-            <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={chartData} barSize={50}>
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="count" fill="#4F46E5" />
-                </BarChart>
-            </ResponsiveContainer>
+            {/* stat - 2 */}
+            <div className="p-6 dark:bg-white/10 sm:inline-flex items-center gap-6 rounded-xl border drop-shadow-md">
+                <div className="p-4 text-red-600 bg-red-200 rounded-full inline-flex">
+                    <Truck />
+                </div>
+
+                <div>
+                    <p className="font-bold text-xl">{totalOrders.length}+</p>
+                    <p className="text-sm tracking-wide">Orders</p>
+                </div>
+            </div>
+
+
+            {/* stat - 3 */}
+            <div className="p-6 dark:bg-white/10 sm:inline-flex items-center gap-6 rounded-xl border drop-shadow-md">
+                <div className="p-4 text-purple-600 bg-purple-200 rounded-full inline-flex">
+                    <ShoppingBag />
+                </div>
+
+                <div>
+                    <p className="font-bold text-xl">{totalProducts.length}+</p>
+                    <p className="text-sm tracking-wide">Products</p>
+                </div>
+            </div>
+
+            {/* stat - 4 */}
+            <div className="p-6 dark:bg-white/10 sm:inline-flex items-center gap-6 rounded-xl border drop-shadow-md">
+                <div className="p-4 text-blue-600 bg-blue-200 rounded-full inline-flex">
+                    <UsersRound />
+                </div>
+
+                <div>
+                    <p className="font-bold text-xl">{totalCustomers.length}+</p>
+                    <p className="text-sm tracking-wide">Customer</p>
+                </div>
+            </div>
         </div>
     );
 };
