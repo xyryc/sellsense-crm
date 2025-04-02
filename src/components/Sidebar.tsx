@@ -23,7 +23,7 @@ import { useState } from "react";
 const routes = [
   { name: "Dashboard", path: "/", icon: <Home size={20} /> },
   { name: "Orders", path: "/orders", icon: <ShoppingBag size={20} /> },
-  { name: "Products", path: "/products", icon: <Box size={20} /> },
+  { name: "Inventory", path: "/products", icon: <Box size={20} /> },
   { name: "Suppliers", path: "/suppliers", icon: <Box size={20} /> },
   { name: "Contacts", path: "/contacts", icon: <Contact size={20} /> },
   { name: "Customers", path: "/customers", icon: <Users size={20} /> },
