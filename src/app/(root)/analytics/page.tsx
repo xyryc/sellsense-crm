@@ -1,5 +1,6 @@
 "use client";
 
+import LoadingState from '@/components/LoadingState';
 import React, { useEffect, useState } from 'react';
 
 const Analytics = () => {
@@ -27,8 +28,11 @@ const Analytics = () => {
         fetchSalesData();
     }, []);
 
+    // if (loading) {
+    //     return <div>Loading...</div>;
+    // }
     if (loading) {
-        return <div>Loading...</div>;
+        return <LoadingState/>;
     }
 
     if (error) {
