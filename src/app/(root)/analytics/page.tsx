@@ -17,7 +17,7 @@ const Analytics = () => {
                     throw new Error('Failed to fetch data');
                 }
                 const data = await response.json();
-                setSalesData(data.data.sales_prediction); 
+                setSalesData(data.data); 
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -44,7 +44,7 @@ const Analytics = () => {
     return (
         <div>
             <h1>Sales Analytics</h1>
-            <h2>Total Sales for 2025: {salesData?.total_revenue_next_12_months} TK</h2>
+            <h2>Total Sales for 2025: {salesData?.total_sales_2025} TK</h2>
             <h3>Monthly Sales Prediction</h3>
             <table border="1">
                 <thead>
@@ -54,10 +54,10 @@ const Analytics = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {salesData?.monthly_sales?.map((item, index) => (
+                    {salesData?.monthly_sales_prediction?.map((item, index) => (
                         <tr key={index}>
                             <td>{item.month}</td>
-                            <td>{item.estimated_revenue.toFixed(2)} TK</td>
+                            <td>{item.sales.toFixed(2)} TK</td>
                         </tr>
                     ))}
                 </tbody>
