@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import ContactsTable from "@/components/ContactsTable";
 import { Contacts as ContactsProps } from "../../../types";
+import LoadingState from "@/components/LoadingState";
 
 // Async function to fetch contacts data from the API
 async function getContacts(): Promise<ContactsProps[]> {
@@ -45,7 +46,7 @@ export default function ContactsPage() {
   }, []); // Empty dependency array means this will run once on mount
 
   if (loading) {
-    return <div>Loading contacts...</div>;
+    return <LoadingState/>;
   }
 
   if (error) {

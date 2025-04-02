@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 import dbConnect from "../../lib/dbConnect";
 import Order from "../../models/Order";
 
-dotenv.config();
+// dotenv.config();
 
 const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`;
 
