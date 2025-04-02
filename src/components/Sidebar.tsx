@@ -4,11 +4,9 @@ import {
   Box,
   Contact,
   CreditCard,
-  Gift,
   Headset,
   Home,
   Menu,
-  Package,
   Settings,
   ShoppingBag,
   Users,
@@ -28,13 +26,11 @@ const routes = [
   { name: "Contacts", path: "/contacts", icon: <Contact size={20} /> },
   { name: "Customers", path: "/customers", icon: <Users size={20} /> },
   { name: "Analytics", path: "/analytics", icon: <BarChart size={20} /> },
-  { name: "Promotions", path: "/promotions", icon: <Gift size={20} /> },
   { name: "Payments", path: "/payments", icon: <CreditCard size={20} /> },
-  { name: "Inventory", path: "/inventory", icon: <Package size={20} /> },
   { name: "Loyalty", path: "/loyalty", icon: <Home size={20} /> },
   { name: "Referral", path: "/referral", icon: <Home size={20} /> },
   { name: "Support", path: "/customer-support", icon: <Headset size={20} /> },
-  { name: "Settings", path: "/settings", icon: <Settings size={20} /> },
+  { name: "Settings", path: "/", icon: <Settings size={20} /> },
 ];
 
 export default function Sidebar() {
