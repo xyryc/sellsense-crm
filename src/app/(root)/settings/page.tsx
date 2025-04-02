@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import React from "react";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun,  LogOut, } from "lucide-react";
+import Link from "next/link";
 const SettingsPage: React.FC = () => {
   const savedTheme = localStorage.getItem("theme");
   const [darkMode, setDarkMode] = useState(savedTheme === "dark");
@@ -21,9 +22,9 @@ const SettingsPage: React.FC = () => {
   };
 
   return (
-    <div className="settings-page">
-      <h1>Settings</h1>
-      <section>
+    <div className="p-6  mx-auto space-y-6 ">
+     <h1 className="text-2xl font-bold text-center">Settings</h1>
+      <section className='space-y-6'>
         <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md flex justify-between items-center">
           <h2 className="text-lg font-semibold">Dark Mode</h2>
           <button
@@ -33,18 +34,46 @@ const SettingsPage: React.FC = () => {
             {darkMode ? <Sun size={20} /> : <Moon size={20} />}
           </button>
         </div>
-        {/* Add profile settings form or components here */}
-      </section>
-      <section>
-        <h2>Account</h2>
+        <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md">
+        <h2 className="text-lg font-semibold mb-2">Account</h2>
         <p>Manage your account settings and security.</p>
-        {/* Add account settings form or components here */}
+      </div>
+
+      {/* Notifications Settings */}
+      <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md flex justify-between items-center">
+        <h2 className="text-lg font-semibold">Notifications</h2>
+        <label className="flex items-center cursor-pointer">
+          <input
+            type="checkbox"
+           
+            className="hidden"
+          />
+          <div
+            className={`w-10 h-5 flex items-center bg-gray-300 dark:bg-gray-600 rounded-full p-1 transition-all $ {
+              notifications ? "bg-green-500" : "bg-gray-400"
+            }`}
+          >
+            <div
+              className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-all $ {
+                notifications ? "translate-x-5" : "translate-x-0"
+              }`}
+            ></div>
+          </div>
+        </label>
+      </div>
+
+      <div className="p-4 bg-red-100 dark:bg-red-800 rounded-lg shadow-md">
+       
+        <div className="flex items-center justify-end gap-2">
+        <Link href={"/"} className="flex items-center gap-1  bg-red-500 px-4 py-2 rounded-xl text-white">
+                <LogOut />
+                Log Out
+              </Link>
+        </div>
+      </div>
+        
       </section>
-      <section>
-        <h2>Notifications</h2>
-        <p>Configure your notification preferences.</p>
-        {/* Add notification settings form or components here */}
-      </section>
+      
     </div>
   );
 };
