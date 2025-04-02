@@ -12,6 +12,7 @@ import {
   Package,
   Settings,
   ShoppingBag,
+  UserPlus,
   Users,
   X
 } from "lucide-react";
@@ -33,7 +34,7 @@ const routes = [
   { name: "Payments", path: "/payments", icon: <CreditCard size={20} /> },
   { name: "Inventory", path: "/inventory", icon: <Package size={20} /> },
   { name: "Loyalty", path: "/loyalty", icon: <Heart size={20} /> },
-  { name: "Referral", path: "/referral", icon: <Home size={20} /> },
+  { name: "Referral", path: "/referral", icon: <UserPlus size={24} /> },
   { name: "Support", path: "/customer-support", icon: <Headset size={20} /> },
   { name: "Settings", path: "/settings", icon: <Settings size={20} /> },
 ];
