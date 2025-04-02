@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import SuppliersTable from "@/components/SuppliersTable";
 import { Suppliers as SuppliersProps } from "../../../types";
+import LoadingState from "@/components/LoadingState";
 
 // Async function to fetch suppliers data from the API
 async function getSuppliers(): Promise<SuppliersProps[]> {
@@ -45,7 +46,7 @@ const Suppliers = () => {
   }, []); // Empty dependency array ensures this runs only once when the component mounts
 
   if (loading) {
-    return <div>Loading suppliers...</div>;
+    return <LoadingState/>;
   }
 
   if (error) {

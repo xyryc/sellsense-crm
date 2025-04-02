@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import OrdersTable from "@/components/OrdersTable";
 import { Orders as OrdersType } from "../../../types";
+import LoadingState from "@/components/LoadingState";
 
 // Async function to fetch orders data from the API
 async function getOrders(): Promise<OrdersType[]> {
@@ -45,8 +46,11 @@ const Orders = () => {
   }, []); // Empty dependency array means this will run once on mount
 
   if (loading) {
-    return <div>Loading orders...</div>;
+    return <LoadingState/>;
   }
+  // if (loading) {
+  //   return <div>Loading orders...</div>;
+  // }
 
   if (error) {
     return <div>Error: {error}</div>;
