@@ -107,7 +107,7 @@ export default function Navbar() {
             {/* My Profile */}
             <DropdownMenuItem className="hover:scale-105 hover:translate-x-1 transition-all duration-300">
               <Link
-                href={"/my-profile"}
+                href={"/profile"}
                 className="flex items-center gap-1 text-lg"
               >
                 <User /> My Profile
