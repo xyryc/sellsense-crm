@@ -38,7 +38,7 @@ const OverallStatsChart = () => {
     }, [])
 
     // total price from orders
-    const totalPrice = totalOrders.reduce((sum, order) => sum + (order.totalPrice || 0), 0);
+    const totalPrice = totalOrders?.reduce((sum, order) => sum + (order.totalPrice || 0), 0);
 
     // data for the chart
     const chartData = [
