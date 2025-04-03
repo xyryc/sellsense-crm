@@ -15,23 +15,28 @@ export const {
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
-        if (!credentials) return null;
+        if (!credentials || !credentials.email || !credentials.password) {
+          throw new Error("Email and password are required");
+        }
+
         try {
           const user = getUserByEmail(credentials?.email);
 
-          if (user) {
-            const isMatch = user.password === credentials?.password;
-
-            if (isMatch) {
-              return user;
-            } else {
-              throw new Error("Invalid Email or Password");
-            }
-          } else {
+          if (!user) {
             throw new Error("User not found");
           }
-        } catch (error) {
-          throw new Error(error);
+
+          const isMatch = user.password === credentials.password;
+          if (!isMatch) {
+            throw new Error("Invalid Email or Password");
+          }
+
+          return user;
+        } catch (error: unknown) {
+          if (error instanceof Error) {
+            throw new Error(error.message);
+          }
+          throw new Error("An unknown error occurred");
         }
       },
     }),
