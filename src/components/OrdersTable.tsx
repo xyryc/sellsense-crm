@@ -5,6 +5,7 @@ import { Orders } from "../types";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Search, Trash2 } from "lucide-react";
+import toast from "react-hot-toast";
 
 interface OrdersTableProps {
   initialOrders: Orders[];
@@ -58,10 +59,10 @@ export default function OrdersTable({ initialOrders }: OrdersTableProps) {
       }
 
       setOrders(orders.filter((order) => order._id !== id));
-      alert("Customer deleted successfully");
+      toast.success("Order deleted successfully");
     } catch (error) {
-      console.error("Error deleting customer:", error);
-      alert("Failed to delete customer");
+      console.error("Error deleting order:", error);
+      toast.error("Failed to delete order");
     } finally {
       setIsDeleting(null);
     }
