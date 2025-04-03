@@ -1,22 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Customer } from "../types";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Search, Trash2 } from "lucide-react";
+import toast from "react-hot-toast";
 
-interface CustomersTableProps {
-  initialCustomers: Customer[];
-}
-
-export default function CustomersTable({
-  initialCustomers,
-}: CustomersTableProps) {
+export default function CustomersTable() {
   const [search, setSearch] = useState("");
-  const [customers, setCustomers] = useState<Customer[]>(initialCustomers);
+  const [customers, setCustomers] = useState<Customer[]>([]);
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
   const [isDeleting, setIsDeleting] = useState<string | null>(null); // Track which customer is being deleted
+
+  // refresh component to show fetched data
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // function to fetch customers data form "api/customers"
+  async function fetchData() {
+    const res = await fetch("/api/customers");
+    const data = await res.json();
+    setCustomers(data.data);
+  }
 
   const filteredCustomers = customers.filter(
     (customer) =>
@@ -32,16 +39,12 @@ export default function CustomersTable({
     }
   });
 
-  
   const handleDelete = async (id: string) => {
     setIsDeleting(id);
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/customers/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`/api/customers/${id}`, {
+        method: "DELETE",
+      });
 
       if (!response.ok) {
         throw new Error("Failed to delete customer");
@@ -49,10 +52,10 @@ export default function CustomersTable({
 
       // Remove the customer from the local state
       setCustomers(customers.filter((customer) => customer._id !== id));
-      alert("Customer deleted successfully");
+      toast.success("Customer deleted successfully");
     } catch (error) {
       console.error("Error deleting customer:", error);
-      alert("Failed to delete customer");
+      toast.error("Failed to delete customer");
     } finally {
       setIsDeleting(null);
     }

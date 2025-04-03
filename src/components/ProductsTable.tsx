@@ -5,6 +5,7 @@ import { Products } from "../types";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Search, Trash2 } from "lucide-react";
+import toast from "react-hot-toast";
 
 interface ProductsTableProps {
   initialProducts: Products[];
@@ -41,7 +42,7 @@ export default function ProductsTable({ initialProducts }: ProductsTableProps) {
   const handleDelete = async (id: string) => {
     setIsDeleting(id);
     try {
-      const response = await fetch(`http://localhost:3000/api/products/${id}`, {
+      const response = await fetch(`/api/products/${id}`, {
         method: "DELETE",
       });
 
@@ -50,10 +51,10 @@ export default function ProductsTable({ initialProducts }: ProductsTableProps) {
       }
 
       setProducts(products.filter((product) => product._id !== id));
-      alert("Product deleted successfully");
+      toast.success("Product deleted successfully");
     } catch (error) {
       console.error("Error deleting product:", error);
-      alert("Failed to delete product");
+      toast.error("Failed to delete product");
     } finally {
       setIsDeleting(null);
     }

@@ -5,6 +5,7 @@ import { Suppliers } from "../types";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Search, Trash2 } from "lucide-react";
+import toast from "react-hot-toast";
 
 interface SuppliersTableProps {
   initialSuppliers: Suppliers[];
@@ -45,7 +46,7 @@ export default function SuppliersTable({
   const handleDelete = async (id: string) => {
     setIsDeleting(id);
     try {
-      const response = await fetch(`http://localhost:3000/api/suppliers/${id}`, {
+      const response = await fetch(`/api/suppliers/${id}`, {
         method: "DELETE",
       });
 
@@ -54,10 +55,10 @@ export default function SuppliersTable({
       }
 
       setSuppliers(suppliers.filter((supplier) => supplier._id !== id));
-      alert("Supplier deleted successfully");
+      toast.success("Supplier deleted successfully");
     } catch (error) {
       console.error("Error deleting supplier:", error);
-      alert("Failed to delete supplier");
+      toast.error("Failed to delete supplier");
     } finally {
       setIsDeleting(null);
     }

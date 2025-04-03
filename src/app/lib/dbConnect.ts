@@ -1,42 +1,37 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-// Create a global connection interface
-interface ConnectionObject {
-  isConnected: number;
+// Define a global cache for the connection
+interface ConnectionCache {
+  isConnected?: number;
 }
 
-// Use a global cache to prevent multiple connections
-const globalConnection = global as unknown as { mongoose?: ConnectionObject };
+// Attach the connection cache to the global object
+const globalCache = global as unknown as { mongoose?: ConnectionCache };
 
+// Database Connection Function
 async function dbConnect(): Promise<void> {
-  // Check if already connected
-  if (globalConnection.mongoose?.isConnected) {
-    console.log('🔄 Using existing database connection');
+  if (globalCache.mongoose?.isConnected) {
+    console.log("🔄 Using existing database connection");
     return;
   }
 
-  // Ensure MongoDB URI is present
-  const MONGODB_URI = process.env.MONGODB_URI;
-  if (!MONGODB_URI) {
-    console.error('❌ MONGODB_URI is not defined');
-    throw new Error('MONGODB_URI must be defined');
+  if (!process.env.MONGODB_URI) {
+    console.error("❌ MONGODB_URI is not defined in environment variables");
+    throw new Error("MONGODB_URI must be defined");
   }
 
   try {
-    // Connect to MongoDB
-    const conn = await mongoose.connect(MONGODB_URI, {
-      serverSelectionTimeoutMS: 5000,
+    // Establish a new connection
+    const conn = await mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 5000, // Increase timeout for better handling
     });
 
-    // Set the connection state
-    globalConnection.mongoose = {
-      isConnected: conn.connections[0].readyState
-    };
+    globalCache.mongoose = { isConnected: conn.connections[0].readyState };
 
-    console.log('✅ Database connected successfully');
+    console.log("✅ Database connected successfully");
   } catch (error) {
-    console.error('❌ Error connecting to the database:', error);
-    throw error;
+    console.error("❌ Error connecting to the database:", error);
+    throw new Error("Database connection failed");
   }
 }
 

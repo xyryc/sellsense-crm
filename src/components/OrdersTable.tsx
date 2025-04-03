@@ -5,6 +5,7 @@ import { Orders } from "../types";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Search, Trash2 } from "lucide-react";
+import toast from "react-hot-toast";
 
 interface OrdersTableProps {
   initialOrders: Orders[];
@@ -30,9 +31,13 @@ export default function OrdersTable({ initialOrders }: OrdersTableProps) {
   const sortedOrders = filteredOrders.sort((a, b) => {
     switch (sortOrder) {
       case "newest":
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
       case "oldest":
-        return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+        return (
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        );
       case "totalPriceAsc":
         return a.totalPrice - b.totalPrice;
       case "totalPriceDesc":
@@ -45,7 +50,7 @@ export default function OrdersTable({ initialOrders }: OrdersTableProps) {
   const handleDelete = async (id: string) => {
     setIsDeleting(id);
     try {
-      const response = await fetch(`http://localhost:3000/api/orders/${id}`, {
+      const response = await fetch(`/api/orders/${id}`, {
         method: "DELETE",
       });
 
@@ -54,10 +59,10 @@ export default function OrdersTable({ initialOrders }: OrdersTableProps) {
       }
 
       setOrders(orders.filter((order) => order._id !== id));
-      alert("Customer deleted successfully");
+      toast.success("Order deleted successfully");
     } catch (error) {
-      console.error("Error deleting customer:", error);
-      alert("Failed to delete customer");
+      console.error("Error deleting order:", error);
+      toast.error("Failed to delete order");
     } finally {
       setIsDeleting(null);
     }
@@ -86,7 +91,13 @@ export default function OrdersTable({ initialOrders }: OrdersTableProps) {
             id="sort"
             value={sortOrder}
             onChange={(e) =>
-              setSortOrder(e.target.value as "newest" | "oldest" | "totalPriceAsc" | "totalPriceDesc")
+              setSortOrder(
+                e.target.value as
+                  | "newest"
+                  | "oldest"
+                  | "totalPriceAsc"
+                  | "totalPriceDesc"
+              )
             }
             className="border p-2 rounded dark:bg-gray-700"
           >
