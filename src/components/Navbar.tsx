@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import {
   Bell,
   Headset,
@@ -10,7 +11,10 @@ import {
   User,
 } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,18 +23,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import Link from "next/link";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
-import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const pathname = usePathname();
-  // Check if there's a saved theme in localStorage and set the initial theme accordingly
-  const savedTheme = localStorage.getItem("theme");
-  const [darkMode, setDarkMode] = useState(savedTheme === "dark"); // Set initial theme from localStorage or default to dark
+  const [darkMode, setDarkMode] = useState<boolean>(true);
 
-  // Set dark mode based on saved preference on initial load
+  // Fetch theme from localStorage only on the client side
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light") {
+      setDarkMode(false);
+    }
+  }, []); // This useEffect runs only once when the component mounts
+
+  // Set dark mode based on preference
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -41,14 +47,13 @@ export default function Navbar() {
     }
   }, [darkMode]);
 
-  // Toggle dark mode and save preference to localStorage
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+    setDarkMode((prev) => !prev);
   };
 
   return (
     <div className="h-16 py-3 md:py-0 bg-white dark:bg-gray-800 flex items-center justify-between px-6 md:px-2 shadow-md">
-      {/* search box */}
+      {/* Search Box */}
       <div className="items-center hidden md:flex">
         <Input
           type="search"
@@ -60,16 +65,17 @@ export default function Navbar() {
         </Button>
       </div>
 
-      {/* nav items */}
+      {/* Navbar Items */}
       <div className="flex items-center gap-3 ml-auto">
-        {/* theme toggle button */}
+        {/* Theme Toggle Button */}
         <button
           onClick={toggleDarkMode}
           className="p-2 rounded-full bg-gray-200 dark:bg-gray-700"
         >
           {darkMode ? <Sun size={20} /> : <Moon size={20} />}
         </button>
-        {/* Message icon */}
+
+        {/* Message Icon */}
         <MessageCircle />
         <Link
           href={"/customer-support"}
@@ -81,23 +87,20 @@ export default function Navbar() {
         >
           <Headset />
         </Link>
+
         {/* Notification Bell */}
         <Bell />
 
-        {/* Profile picture with dropdown routes to my profile and logout */}
+        {/* Profile Dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger>
-            <div>
-              <Image
-                src={
-                  "https://wallpapers-clan.com/wp-content/uploads/2022/11/cute-frog-pfp-2.jpg"
-                }
-                alt="user pfp"
-                width={40}
-                height={40}
-                className="rounded-full border-2 border-cyan-500 cursor-pointer"
-              />
-            </div>
+            <Image
+              src="https://wallpapers-clan.com/wp-content/uploads/2022/11/cute-frog-pfp-2.jpg"
+              alt="user pfp"
+              width={40}
+              height={40}
+              className="rounded-full border-2 border-cyan-500 cursor-pointer"
+            />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="mr-2">
             <DropdownMenuLabel className="text-lg">
