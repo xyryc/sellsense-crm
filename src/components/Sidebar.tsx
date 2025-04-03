@@ -32,7 +32,7 @@ const routes = [
   { name: "Loyalty", path: "/loyalty", icon: <Heart size={20} /> },
   { name: "Referral", path: "/referral", icon: <UserPlus size={24} /> },
   { name: "Support", path: "/customer-support", icon: <Headset size={20} /> },
-  { name: "Settings", path: "/", icon: <Settings size={20} /> },
+  { name: "Settings", path: "/settings", icon: <Settings size={20} /> },
 ];
 
 export default function Sidebar() {
