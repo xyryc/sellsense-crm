@@ -10,40 +10,45 @@ const LoyaltyPage = ({ userId }: { userId: string }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Fetch loyalty points from the API
+  // Hardcoded Loyalty Points Data
+  const hardcodedLoyaltyPoints = {
+    points: 200, // Set a fixed number of points
+    history: [
+      { action: "Sign-up Bonus", points: 50, date: new Date().toISOString() },
+      { action: "Purchase", points: 100, date: new Date().toISOString() },
+      { action: "Referral Bonus", points: 50, date: new Date().toISOString() },
+    ],
+  };
+
+  // Simulate API fetching with hardcoded data
   const fetchLoyaltyPoints = async () => {
-    // if (!userId) {
-    //   setError("User ID is missing.");
-    //   return;
-    // }
     setLoading(true);
     setError("");
     try {
-      const response = await fetch(`/api/loyalty/1`);
-      const data = await response.json();
-      if (!data.success) throw new Error(data.error);
-      setLoyaltyData(data.data);
+      // Simulating a delay like an API call
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setLoyaltyData(hardcodedLoyaltyPoints);
     } catch (err: any) {
-      setError(err.message);
+      setError("Failed to fetch data");
     } finally {
       setLoading(false);
     }
   };
 
-  // Add points via the API
+  // Simulate adding points (hardcoded, no real API call)
   const addPoints = async (points: number, action: string) => {
     setError("");
     try {
-      const response = await fetch(`/api/loyalty/${userId}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ points, action }),
+      const newHistory = [
+        ...loyaltyData!.history,
+        { action, points, date: new Date().toISOString() },
+      ];
+      setLoyaltyData({
+        points: loyaltyData!.points + points,
+        history: newHistory,
       });
-      const data = await response.json();
-      if (!data.success) throw new Error(data.error);
-      setLoyaltyData(data.data);
     } catch (err: any) {
-      setError(err.message);
+      setError("Failed to add points");
     }
   };
 
