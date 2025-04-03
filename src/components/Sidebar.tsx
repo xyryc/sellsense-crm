@@ -4,12 +4,13 @@ import {
   Box,
   Contact,
   CreditCard,
-  Gift,
+  Headset,
+  Heart,
   Home,
   Menu,
-  Package,
   Settings,
   ShoppingBag,
+  UserPlus,
   Users,
   X
 } from "lucide-react";
@@ -22,16 +23,15 @@ import { useState } from "react";
 const routes = [
   { name: "Dashboard", path: "/", icon: <Home size={20} /> },
   { name: "Orders", path: "/orders", icon: <ShoppingBag size={20} /> },
-  { name: "Products", path: "/products", icon: <Box size={20} /> },
+  { name: "Inventory", path: "/products", icon: <Box size={20} /> },
   { name: "Suppliers", path: "/suppliers", icon: <Box size={20} /> },
   { name: "Contacts", path: "/contacts", icon: <Contact size={20} /> },
   { name: "Customers", path: "/customers", icon: <Users size={20} /> },
   { name: "Analytics", path: "/analytics", icon: <BarChart size={20} /> },
-  { name: "Promotions", path: "/promotions", icon: <Gift size={20} /> },
   { name: "Payments", path: "/payments", icon: <CreditCard size={20} /> },
-  { name: "Inventory", path: "/inventory", icon: <Package size={20} /> },
-  { name: "Loyalty", path: "/loyalty", icon: <Home size={20} /> },
-  { name: "Referral", path: "/referral", icon: <Home size={20} /> },
+  { name: "Loyalty", path: "/loyalty", icon: <Heart size={20} /> },
+  { name: "Referral", path: "/referral", icon: <UserPlus size={24} /> },
+  { name: "Support", path: "/customer-support", icon: <Headset size={20} /> },
   { name: "Settings", path: "/settings", icon: <Settings size={20} /> },
 ];
 
