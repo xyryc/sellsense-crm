@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import {
   Bell,
@@ -27,14 +26,15 @@ import {
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [darkMode, setDarkMode] = useState(true); // Default to light mode
+  const [darkMode, setDarkMode] = useState<boolean>(true);
 
   // Fetch theme from localStorage only on the client side
   useEffect(() => {
-    const savedTheme =
-      typeof window !== "undefined" ? localStorage.getItem("theme") : null;
-    setDarkMode(savedTheme === "dark");
-  }, []);
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light") {
+      setDarkMode(false);
+    }
+  }, []); // This useEffect runs only once when the component mounts
 
   // Set dark mode based on preference
   useEffect(() => {
