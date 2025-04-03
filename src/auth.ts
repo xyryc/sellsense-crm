@@ -14,36 +14,49 @@ export const {
   },
   providers: [
     CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: {
+          label: "Email",
+          type: "text",
+          placeholder: "example@example.com",
+        },
+        password: { label: "Password", type: "password" },
+      },
       async authorize(credentials) {
-        if (!credentials || !credentials.email || !credentials.password) {
-          throw new Error("Email and password are required");
+        // Ensure credentials exist and contain valid data
+        if (
+          !credentials ||
+          typeof credentials.email !== "string" ||
+          typeof credentials.password !== "string"
+        ) {
+          throw new Error("Invalid credentials provided.");
         }
 
         try {
-          const user = getUserByEmail(credentials?.email);
+          const user = getUserByEmail(credentials.email);
 
-          if (!user) {
+          if (user) {
+            const isMatch = user.password === credentials.password;
+
+            if (isMatch) {
+              return user;
+            } else {
+              throw new Error("Invalid Email or Password");
+            }
+          } else {
             throw new Error("User not found");
           }
-
-          const isMatch = user.password === credentials.password;
-          if (!isMatch) {
-            throw new Error("Invalid Email or Password");
-          }
-
-          return user;
-        } catch (error: unknown) {
-          if (error instanceof Error) {
-            throw new Error(error.message);
-          }
-          throw new Error("An unknown error occurred");
+        } catch (error) {
+          throw new Error(
+            error instanceof Error ? error.message : String(error)
+          );
         }
       },
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_ID!,
       clientSecret: process.env.GOOGLE_SECRET!,
-
       authorization: {
         params: {
           prompt: "consent",
