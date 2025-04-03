@@ -57,54 +57,53 @@ const LoyaltyPage = ({ userId }: { userId: string }) => {
   }, [userId]);
 
   return (
-    <section className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-2xl">
-      <h2 className="text-2xl font-bold text-gray-800 text-center">
-        Loyalty Rewards
-      </h2>
-      {loading ? (
-        <div className="flex justify-center mt-4" aria-live="polite">
-          <Loader2 className="animate-spin text-gray-500 w-6 h-6" />
-        </div>
-      ) : error ? (
-        <div className="text-center mt-4" aria-live="assertive">
-          <p className="text-red-500">{error}</p>
-          <button
-            className="mt-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-            onClick={fetchLoyaltyPoints}
-          >
-            Retry
-          </button>
-        </div>
-      ) : loyaltyData ? (
-        <div className="mt-4">
-          <p className="text-lg text-gray-700">
-            Total Points:{" "}
-            <span className="font-semibold">{loyaltyData.points}</span>
-          </p>
-          <h3 className="mt-4 text-lg font-semibold">History:</h3>
-          <ul className="bg-gray-100 p-4 rounded-md mt-2">
-            {loyaltyData.history.length > 0 ? (
-              loyaltyData.history.map((entry, index) => (
-                <li key={index} className="text-gray-600 text-sm mb-1">
-                  {new Date(entry.date).toLocaleDateString()} - {entry.action}{" "}
-                  (+{entry.points} points)
-                </li>
-              ))
-            ) : (
-              <p className="text-gray-500 text-sm">No history yet.</p>
-            )}
-          </ul>
-          <Link href="/referral"
-            className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-            onClick={() => addPoints(50, "Referral Bonus")}
-          >
-            Earn 50 Points (Referral Bonus)
-          </Link>
-        </div>
-      ) : (
-        <p className="text-gray-500 text-center mt-4">No data available.</p>
-      )}
-    </section>
+    <section className="max-w-3xl mx-auto p-8 bg-white text-gray-800 shadow-xl rounded-3xl">
+    <h2 className="text-3xl font-extrabold text-center text-blue-600 drop-shadow-md">
+      Loyalty Rewards
+    </h2>
+    {loading ? (
+      <div className="flex justify-center mt-6" aria-live="polite">
+        <Loader2 className="animate-spin text-blue-600 w-8 h-8" />
+      </div>
+    ) : error ? (
+      <div className="text-center mt-6" aria-live="assertive">
+        <p className="text-red-500 font-semibold">{error}</p>
+        <button
+          className="mt-3 bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
+          onClick={fetchLoyaltyPoints}
+        >
+          Retry
+        </button>
+      </div>
+    ) : loyaltyData ? (
+      <div className="mt-6 p-6 bg-gray-100 rounded-lg shadow-md">
+        <p className="text-lg font-medium">
+          Total Points: <span className="font-bold text-blue-600">{loyaltyData.points}</span>
+        </p>
+        <h3 className="mt-5 text-lg font-semibold text-gray-700">History:</h3>
+        <ul className="bg-gray-200 p-5 rounded-lg mt-3">
+          {loyaltyData.history.length > 0 ? (
+            loyaltyData.history.map((entry, index) => (
+              <li key={index} className="text-gray-700 text-sm mb-2">
+                {new Date(entry.date).toLocaleDateString()} - {entry.action} (+{entry.points} points)
+              </li>
+            ))
+          ) : (
+            <p className="text-gray-500 text-sm">No history yet.</p>
+          )}
+        </ul>
+        <Link
+          href="/referral"
+          className="mt-5 inline-block bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
+          onClick={() => addPoints(50, "Referral Bonus")}
+        >
+          Earn 50 Points (Referral Bonus)
+        </Link>
+      </div>
+    ) : (
+      <p className="text-gray-500 text-center mt-6">No data available.</p>
+    )}
+  </section>
   );
 };
 
