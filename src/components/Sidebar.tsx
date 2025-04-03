@@ -5,10 +5,12 @@ import {
   Contact,
   CreditCard,
   Headset,
+  Heart,
   Home,
   Menu,
   Settings,
   ShoppingBag,
+  UserPlus,
   Users,
   X
 } from "lucide-react";
@@ -27,8 +29,8 @@ const routes = [
   { name: "Customers", path: "/customers", icon: <Users size={20} /> },
   { name: "Analytics", path: "/analytics", icon: <BarChart size={20} /> },
   { name: "Payments", path: "/payments", icon: <CreditCard size={20} /> },
-  { name: "Loyalty", path: "/loyalty", icon: <Home size={20} /> },
-  { name: "Referral", path: "/referral", icon: <Home size={20} /> },
+  { name: "Loyalty", path: "/loyalty", icon: <Heart size={20} /> },
+  { name: "Referral", path: "/referral", icon: <UserPlus size={24} /> },
   { name: "Support", path: "/customer-support", icon: <Headset size={20} /> },
   { name: "Settings", path: "/", icon: <Settings size={20} /> },
 ];
