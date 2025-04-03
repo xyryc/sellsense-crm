@@ -19,7 +19,7 @@ const LoyaltyPage = ({ userId }: { userId: string }) => {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch(`/api/loyalty/${userId}`);
+      const response = await fetch(`/api/loyalty/1`);
       const data = await response.json();
       if (!data.success) throw new Error(data.error);
       setLoyaltyData(data.data);
