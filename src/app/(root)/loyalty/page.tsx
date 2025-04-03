@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
-
+import Link from "next/link";
 const LoyaltyPage = ({ userId }: { userId: string }) => {
   const [loyaltyData, setLoyaltyData] = useState<{
     points: number;
@@ -94,12 +94,12 @@ const LoyaltyPage = ({ userId }: { userId: string }) => {
               <p className="text-gray-500 text-sm">No history yet.</p>
             )}
           </ul>
-          <button
+          <Link href="/referral"
             className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
             onClick={() => addPoints(50, "Referral Bonus")}
           >
             Earn 50 Points (Referral Bonus)
-          </button>
+          </Link>
         </div>
       ) : (
         <p className="text-gray-500 text-center mt-4">No data available.</p>
