@@ -58,12 +58,12 @@ const LoyaltyPage = ({ userId }: { userId: string }) => {
 
   return (
     <section className="max-w-3xl mx-auto p-8 bg-white text-gray-800 shadow-xl rounded-3xl">
-    <h2 className="text-3xl font-extrabold text-center text-blue-600 drop-shadow-md">
+    <h2 className="text-3xl font-extrabold text-center text-[#06b6d4] drop-shadow-md">
       Loyalty Rewards
     </h2>
     {loading ? (
       <div className="flex justify-center mt-6" aria-live="polite">
-        <Loader2 className="animate-spin text-blue-600 w-8 h-8" />
+        <Loader2 className="animate-spin text-[#06b6d4] w-8 h-8" />
       </div>
     ) : error ? (
       <div className="text-center mt-6" aria-live="assertive">
@@ -94,7 +94,7 @@ const LoyaltyPage = ({ userId }: { userId: string }) => {
         </ul>
         <Link
           href="/referral"
-          className="mt-5 inline-block bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
+          className="mt-5 inline-block bg-[#06B6D4] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#04b3ce] transition"
           onClick={() => addPoints(50, "Referral Bonus")}
         >
           Earn 50 Points (Referral Bonus)
