@@ -2,6 +2,13 @@
 
 SellSense is a comprehensive CRM platform designed to give administrators a complete overview of their store, suppliers, inventory, customers, sales analytics, payment statuses, and AI-powered support.
 
+## Live Link : https://sellsense-crm.vercel.app
+
+## Check The Project :
+
+- **Cheking Email : admin@gmail.com**
+- **Cheking Password : admin123**
+
 ## Features
 
 - **Customer Management** 👥
@@ -95,15 +102,15 @@ SellSense is a comprehensive CRM platform designed to give administrators a comp
 
 # Contrubutors
 
-| Name                 | Email                         |
-| -------------------- | ----------------------------- |
-| khaled saifulla      | khaledsaifulla010@gmail.com   |
-| Ansarul Islam        | ansarulislam01739@gmail.com   |
-| Khairul Islam        | khairul4102.bd@gmail.com      |
-| Mubassir Ahmed Bappi | mubashirbappi@gmail.com       |
-| Hm Faisal            | ahmfaisal10@gmail.com         |
-| NAJIB HOSSAIN        | https://najib-hossain.web.app |
-| Md Talath Un Nabi    | mdtalathunnabi@gmail.com      |
+| Name                             | Website                                     |
+| -------------------------------- | ------------------------------------------- |
+| Khaled Saifulla--- (Team Leader) | https://khaledsaifulla-cb9be.web.app        |
+| Ansarul Islam                    | https://ansarul-islam-portfolio.netlify.app |
+| Khairul Islam                    | https://khairulislam.vercel.app             |
+| Najib Hossain                    | https://najib-hossain.web.app               |
+| Hm Faisal                        | https://hmfaisal.vercel.app                 |
+| Md Talath Un Nabi                | https://mdanik.vercel.app                   |
+| Mubassir Ahmed Bappi             | https://mubashirbappi.netlify.app           |
 
 ## Next.js Local Project Setup
 
