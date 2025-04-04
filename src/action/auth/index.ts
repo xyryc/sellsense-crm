@@ -2,13 +2,6 @@
 
 import { signIn, signOut } from "@/auth";
 
-export async function doSocialLogin(formData: FormData) {
-  const action = formData.get("action") as string | undefined;
-
-  if (!action) throw new Error("Invalid action provided");
-
-  await signIn(action, { redirectTo: "/profile" });
-}
 
 export async function doLogout() {
   await signOut({ redirectTo: "/login" });
