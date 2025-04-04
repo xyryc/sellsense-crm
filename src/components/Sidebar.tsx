@@ -4,6 +4,7 @@ import {
   Box,
   Contact,
   CreditCard,
+  Handshake,
   Headset,
   Heart,
   Home,
@@ -24,7 +25,7 @@ const routes = [
   { name: "Dashboard", path: "/", icon: <Home size={20} /> },
   { name: "Orders", path: "/orders", icon: <ShoppingBag size={20} /> },
   { name: "Inventory", path: "/products", icon: <Box size={20} /> },
-  { name: "Suppliers", path: "/suppliers", icon: <Box size={20} /> },
+  { name: "Suppliers", path: "/suppliers", icon: <Handshake size={20} /> },
   { name: "Contacts", path: "/contacts", icon: <Contact size={20} /> },
   { name: "Customers", path: "/customers", icon: <Users size={20} /> },
   { name: "Analytics", path: "/analytics", icon: <BarChart size={20} /> },
@@ -50,9 +51,14 @@ export default function Sidebar() {
       )}
 
       <div
-        className={`fixed md:relative bg-white dark:bg-gray-800 h-full transition-all duration-300 ease-in-out px-0 md:px-2 ${
-          open ? "w-64" : "w-0 md:w-64"
-        } overflow-y-auto max-h-screen`}
+         className={`
+          bg-white dark:bg-gray-800
+          transition-all duration-300 ease-in-out
+          px-0 md:px-2
+          overflow-y-auto
+          ${open ? "fixed inset-0 z-50 w-64" : "w-0 fixed inset-0 z-50 md:relative md:w-64"}
+          md:relative md:block md:h-screen
+        `}
       >
         {/* Menu button for sidebar toggling */}
         <button
