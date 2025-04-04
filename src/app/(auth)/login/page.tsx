@@ -1,5 +1,4 @@
 import LoginForm from "../_components/login-form";
-import SocialLoginButtons from "../_components/social-login-buttons";
 
 const LoginPage = () => {
   return (
@@ -7,7 +6,6 @@ const LoginPage = () => {
       <h1 className="text-5xl font-bold text-center">Please Login</h1>
       <div className="max-w-md mx-auto w-full p-6 bg-white rounded-lg shadow-md border mt-12 ">
         <LoginForm />
-        <SocialLoginButtons />
       </div>
     </div>
   );

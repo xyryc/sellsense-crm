@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
 import { getUserByEmail } from "./data/users";
 
 export const {
@@ -11,6 +10,7 @@ export const {
 } = NextAuth({
   session: {
     strategy: "jwt",
+    maxAge: 24 * 60 * 60, // 1 days
   },
   providers: [
     CredentialsProvider({
@@ -52,17 +52,6 @@ export const {
             error instanceof Error ? error.message : String(error)
           );
         }
-      },
-    }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_ID!,
-      clientSecret: process.env.GOOGLE_SECRET!,
-      authorization: {
-        params: {
-          prompt: "consent",
-          access_type: "offline",
-          response_type: "code",
-        },
       },
     }),
   ],
