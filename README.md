@@ -95,15 +95,15 @@ SellSense is a comprehensive CRM platform designed to give administrators a comp
 
 # Contrubutors
 
-| Name                 | Email                         |
-| -------------------- | ----------------------------- |
-| khaled saifulla      | khaledsaifulla010@gmail.com   |
-| Ansarul Islam        | ansarulislam01739@gmail.com   |
-| Khairul Islam        | khairul4102.bd@gmail.com      |
-| Mubassir Ahmed Bappi | mubashirbappi@gmail.com       |
-| Hm Faisal            | ahmfaisal10@gmail.com         |
-| NAJIB HOSSAIN        | https://najib-hossain.web.app |
-| Md Talath Un Nabi    | mdtalathunnabi@gmail.com      |
+| Name                 | Email                         | GitHub Profile                                            |
+| -------------------- | ----------------------------- | --------------------------------------------------------- |
+| khaled saifulla      | khaledsaifulla010@gmail.com   | [khaledsaifulla010](https://github.com/khaledsaifulla010) |
+| Ansarul Islam        | ansarulislam01739@gmail.com   | [AnsarulIslam10](https://github.com/AnsarulIslam10)       |
+| Khairul Islam        | khairul4102.bd@gmail.com      | [khairul1036](https://github.com/khairul1036)             |
+| Mubassir Ahmed Bappi | mubashirbappi@gmail.com       | [mubashirbappi5](https://github.com/mubashirbappi5)       |
+| Hm Faisal            | ahmfaisal10@gmail.com         | [hm-faisal](https://github.com/hm-faisal)                 |
+| NAJIB HOSSAIN        | https://najib-hossain.web.app | [NajibHossain49](https://github.com/NajibHossain49)       |
+| Md Talath Un Nabi    | mdtalathunnabi@gmail.com      | [xyryc](https://github.com/xyryc)                         |
 
 ## Next.js Local Project Setup
 
