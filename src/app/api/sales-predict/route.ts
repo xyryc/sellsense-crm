@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 import dbConnect from "../../lib/dbConnect";
 import Order from "../../models/Order";
 
-dotenv.config();
+// dotenv.config();
 
 const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`;
 
@@ -37,13 +37,28 @@ export async function GET(request: NextRequest) {
     }
 
     // Prepare input data for Gemini API
+    // const prompt = `
+    //   Given the following sales data, predict the total sales revenue for the next 12 months.
+    //   Return the output in JSON format with estimated monthly sales.
+
+    //   Sales Data:
+    //   ${JSON.stringify(orders, null, 2)}
+    // `;
+
     const prompt = `
-      Given the following sales data, predict the total sales revenue for the next 12 months.
-      Return the output in JSON format with estimated monthly sales.
+      Given the following sales data for the last few months, predict the total sales revenue for the next 12 months. The prediction should include estimated monthly sales, starting from April 2025 and ending in March 2026. 
+
+      The output should be in JSON format with the following structure:
+      {
+        "monthly_sales_prediction": [
+          { "month": "Month Name", "sales": estimated sales for that month }
+        ],
+        "total_sales_2025": estimated total sales revenue for the year 2025
+      }
 
       Sales Data:
       ${JSON.stringify(orders, null, 2)}
-    `;
+      `;
 
     const response = await fetch(
       `${GEMINI_API_URL}?key=${process.env.GEMINI_API_KEY}`,
@@ -76,9 +91,9 @@ export async function GET(request: NextRequest) {
     let prediction;
     try {
       prediction = JSON.parse(cleanedText);
-    //   console.log("Cleaned Prediction Data:", prediction);
+      //   console.log("Cleaned Prediction Data:", prediction);
     } catch (parseError) {
-    //   console.error("Failed to parse Gemini response:", parseError);
+      //   console.error("Failed to parse Gemini response:", parseError);
       return NextResponse.json(
         { success: false, error: "Invalid JSON format from Gemini response." },
         { status: 500 }

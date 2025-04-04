@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import ProductsTable from "@/components/ProductsTable";
 import { Products as ProductsProps } from "../../../types";
+import LoadingState from "@/components/LoadingState";
 
 // Async function to fetch products data from the API
 async function getProducts(): Promise<ProductsProps[]> {
@@ -45,7 +46,7 @@ const Products = () => {
   }, []); // Empty dependency array ensures this runs only once when the component mounts
 
   if (loading) {
-    return <div>Loading Inventory...</div>;
+    return <LoadingState/>;
   }
 
 
