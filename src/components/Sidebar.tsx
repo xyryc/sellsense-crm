@@ -15,7 +15,7 @@ import {
   Users,
   X
 } from "lucide-react";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation"; // Import usePathname
 import { useState } from "react";
@@ -31,7 +31,7 @@ const routes = [
   { name: "Analytics", path: "/analytics", icon: <BarChart size={20} /> },
   { name: "Payments", path: "/payments", icon: <CreditCard size={20} /> },
   { name: "Loyalty", path: "/loyalty", icon: <Heart size={20} /> },
-  { name: "Referral", path: "/referral", icon: <UserPlus size={24} /> },
+  { name: "Referral", path: "/referral", icon: <UserPlus size={20} /> },
   { name: "Support", path: "/customer-support", icon: <Headset size={20} /> },
   { name: "Settings", path: "/settings", icon: <Settings size={20} /> },
 ];
@@ -70,7 +70,7 @@ export default function Sidebar() {
 
         {/* Main Logo */}
         <div
-          className={`mb-4 text-center ${open ? "block" : "hidden md:block"}`}
+          className={`my-4 text-center ${open ? "block" : "hidden md:block"}`}
         >
           <Link href={"/"} className="text-4xl font-bold text-cyan-500">
             SellSense
@@ -78,7 +78,7 @@ export default function Sidebar() {
         </div>
 
         {/* Admin profile */}
-        <div
+        {/* <div
           className={`pl-7 bg-gray-200 dark:bg-gray-700 py-2 rounded-md ${
             open ? "block" : "hidden md:block"
           }`}
@@ -98,7 +98,7 @@ export default function Sidebar() {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Sidebar navigation */}
         <nav className="p-4 space-y-4">

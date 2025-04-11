@@ -8,19 +8,27 @@ import Link from "next/link";
 const SettingsPage: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [notifications, setNotifications] = useState(false);
+  const [mounted, setMounted] = useState(false); // Prevent flicker
 
-  // Run this only in the client-side, ensuring localStorage is accessible
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
-    setDarkMode(savedTheme === "dark");
+    const isDark = savedTheme === "dark" || (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-    // Load notifications preference from localStorage
+    setDarkMode(isDark);
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
     const savedNotifications = localStorage.getItem("notifications") === "true";
     setNotifications(savedNotifications);
-  }, []); // This useEffect will run only once when the component mounts
+
+    setMounted(true); // Done mounting
+  }, []);
 
   useEffect(() => {
-    // Set the theme based on darkMode state
+    if (!mounted) return; // Prevent flicker
     if (darkMode) {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
@@ -28,19 +36,20 @@ const SettingsPage: React.FC = () => {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
-  }, [darkMode]); // Re-run when darkMode changes
+  }, [darkMode, mounted]);
 
-  // Toggle dark mode and save preference to localStorage
   const toggleDarkMode = () => {
     setDarkMode((prev) => !prev);
   };
 
-  // Handle notification toggle
   const toggleNotifications = () => {
     const newNotificationsState = !notifications;
     setNotifications(newNotificationsState);
     localStorage.setItem("notifications", String(newNotificationsState));
   };
+
+  // ⛔ Don't render until mounted
+  if (!mounted) return null;
 
   return (
     <div className="p-6 mx-auto space-y-6">
@@ -61,7 +70,6 @@ const SettingsPage: React.FC = () => {
           <p>Manage your account settings and security.</p>
         </div>
 
-        {/* Notifications Settings */}
         <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md flex justify-between items-center">
           <h2 className="text-lg font-semibold">Notifications</h2>
           <label className="flex items-center cursor-pointer">
@@ -72,8 +80,8 @@ const SettingsPage: React.FC = () => {
               className="hidden"
             />
             <div
-              className={`w-10 h-5 flex items-center bg-gray-300 dark:bg-gray-600 rounded-full p-1 transition-all ${
-                notifications ? "bg-green-500" : "bg-gray-400"
+              className={`w-10 h-5 flex items-center rounded-full p-1 transition-all ${
+                notifications ? "bg-green-500" : "bg-gray-400 dark:bg-gray-600"
               }`}
             >
               <div
@@ -85,7 +93,6 @@ const SettingsPage: React.FC = () => {
           </label>
         </div>
 
-        {/* Log Out Section */}
         <div className="p-4 bg-red-100 dark:bg-red-800 rounded-lg shadow-md">
           <div className="flex items-center justify-end gap-2">
             <Link

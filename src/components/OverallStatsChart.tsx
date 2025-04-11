@@ -61,7 +61,7 @@ const OverallStatsChart = () => {
                 </div>
 
                 <div>
-                    <p className="font-bold text-xl">${Math.floor(totalPrice)}+</p>
+                    <p className="font-bold text-xl">${Math.floor(totalPrice)}</p>
                     <p className="text-sm tracking-wide">Revenue</p>
                 </div>
             </div>
