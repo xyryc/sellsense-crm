@@ -7,7 +7,7 @@ import DashboardCalendar from "./DashboardCalendar";
 
 export default function Dashboard() {
   return (
-    <div className="overflow-y-scroll max-h-[85vh]">
+    <div>
       <h1 className="text-xl font-bold mb-4">Welcome Admin</h1>
 
       <OverallStatsChart />

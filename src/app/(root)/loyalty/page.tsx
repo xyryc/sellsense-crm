@@ -52,7 +52,7 @@ const LoyaltyPage = () => {
   }, []);
 
   return (
-    <section className="max-w-3xl mx-auto p-8 bg-white text-gray-800 shadow-xl rounded-3xl">
+    <section className="max-w-3xl mx-auto p-8 text-gray-800 shadow-xl rounded-3xl">
       <h2 className="text-3xl font-extrabold text-center text-[#06b6d4] drop-shadow-md">
         Loyalty Rewards
       </h2>
@@ -64,7 +64,7 @@ const LoyaltyPage = () => {
         <div className="text-center mt-6" aria-live="assertive">
           <p className="text-red-500 font-semibold">{error}</p>
           <button
-            className="mt-3 bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
+            className="mt-3 bg-blue-600 px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
             onClick={fetchLoyaltyPoints}
           >
             Retry

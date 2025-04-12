@@ -2,12 +2,13 @@
 
 SellSense is a comprehensive CRM platform designed to give administrators a complete overview of their store, suppliers, inventory, customers, sales analytics, payment statuses, and AI-powered support.
 
-## Live Link : https://sellsense-crm.vercel.app
+## Live Link 
+Live Site: [Sellsense](https://sellsense.vercel.app)
 
-## Check The Project :
+## Login Credential
 
-- **Cheking Email : admin@gmail.com**
-- **Cheking Password : admin123**
+- Admin Email: admin@gmail.com
+- Admin Password: admin123
 
 ## Features
 
