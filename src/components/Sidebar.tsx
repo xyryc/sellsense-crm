@@ -70,7 +70,7 @@ export default function Sidebar() {
 
         {/* Main Logo */}
         <div
-          className={`my-4 text-center ${open ? "block" : "hidden md:block"}`}
+          className={`mt-4 text-center ${open ? "block" : "hidden md:block"}`}
         >
           <Link href={"/"} className="text-4xl font-bold text-cyan-500">
             SellSense
@@ -101,12 +101,12 @@ export default function Sidebar() {
         </div> */}
 
         {/* Sidebar navigation */}
-        <nav className="p-4 space-y-4">
+        <nav className="p-4">
           {routes.map((route) => (
             <Link
               key={route.name}
               href={route.path}
-              className={`flex items-center p-3 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 hover:translate-x-2 rounded-md ${
+              className={`flex items-center p-3 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 hover:translate-x-1 rounded-md ${
                 pathname === route.path
                   ? "text-cyan-500 dark:text-cyan-600 font-bold" // Active route styling
                   : ""

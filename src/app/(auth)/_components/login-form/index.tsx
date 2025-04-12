@@ -35,9 +35,9 @@ export default function LoginForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
+      <Card className="dark:bg-gray-900">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">Sellsense</CardTitle>
+          <CardTitle className="text-2xl font-bold">SellSense</CardTitle>
           <CardDescription>
             Enter your email below to login to your account
           </CardDescription>
@@ -50,6 +50,7 @@ export default function LoginForm({
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
+              defaultValue={"admin@gmail.com"}
                 id="email"
                 name="email"
                 type="email"
@@ -61,6 +62,7 @@ export default function LoginForm({
             <div className="grid gap-2">
               <Label htmlFor="password">Password</Label>
               <Input
+              defaultValue={"admin123"}
                 id="password"
                 name="password"
                 type="password"

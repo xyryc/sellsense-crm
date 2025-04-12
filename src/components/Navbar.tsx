@@ -24,6 +24,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import UserIcon from "@/assets/user.jpg"
+import { doLogout } from "@/action/auth";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -80,11 +81,10 @@ export default function Navbar() {
         <MessageCircle />
         <Link
           href={"/customer-support"}
-          className={`${
-            pathname === "/customer-support"
-              ? "text-cyan-500 dark:text-cyan-600 font-bold"
-              : ""
-          }`}
+          className={`${pathname === "/customer-support"
+            ? "text-cyan-500 dark:text-cyan-600 font-bold"
+            : ""
+            }`}
         >
           <Headset />
         </Link>
@@ -104,25 +104,27 @@ export default function Navbar() {
             />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="mr-2">
-            <DropdownMenuLabel className="text-lg">
+            <DropdownMenuLabel>
               My Account
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             {/* My Profile */}
-            <DropdownMenuItem className="hover:scale-105 hover:translate-x-1 transition-all duration-300">
+            <DropdownMenuItem>
               <Link
                 href={"/profile"}
-                className="flex items-center gap-1 text-lg"
+                className="flex items-center gap-1"
               >
-                <User /> My Profile
+                <User size={16} />Profile
               </Link>
             </DropdownMenuItem>
             {/* Log Out */}
-            <DropdownMenuItem className="hover:scale-105 hover:translate-x-1 transition-all duration-300">
-              <Link href={"/"} className="flex items-center gap-1 text-lg">
-                <LogOut />
-                Log Out
-              </Link>
+            <DropdownMenuItem>
+              <form action={doLogout}>
+                <button type="submit" className="flex items-center gap-1">
+                  <LogOut size={16} />
+                  Logout
+                </button>
+              </form>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

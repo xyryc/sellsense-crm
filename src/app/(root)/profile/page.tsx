@@ -10,7 +10,7 @@ const Profile = async () => {
   if (!session?.user) redirect("/login");
 
   return (
-    <div className="flex justify-center items-center flex-col gap-4 h-full">
+    <div className="flex justify-center items-center flex-col gap-2 h-full">
       <Image
         src={UserIcon}
         alt="Admin Profile Picture"
@@ -19,7 +19,7 @@ const Profile = async () => {
         className="rounded-full border-4 border-cyan-500 cursor-pointer"
       />
       <h1 className="text-2xl font-bold">Welcome Back!</h1>
-      <h3 className="text-gray-600">Email: {session?.user?.email}</h3>
+      <h3>Email: {session?.user?.email}</h3>
       <LogoutButton />
     </div>
   );
