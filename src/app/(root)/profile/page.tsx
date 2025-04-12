@@ -2,6 +2,7 @@ import LogoutButton from "@/app/(auth)/_components/logout-button";
 import { auth } from "@/auth";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import UserIcon from "@/assets/user.jpg"
 
 const Profile = async () => {
   const session = await auth();
@@ -11,9 +12,7 @@ const Profile = async () => {
   return (
     <div className="flex justify-center items-center flex-col gap-4 h-full">
       <Image
-        src={
-          "https://wallpapers-clan.com/wp-content/uploads/2022/11/cute-frog-pfp-2.jpg"
-        }
+        src={UserIcon}
         alt="Admin Profile Picture"
         width={100}
         height={100}

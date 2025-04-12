@@ -23,6 +23,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import UserIcon from "@/assets/user.jpg"
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -95,7 +96,7 @@ export default function Navbar() {
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Image
-              src="https://wallpapers-clan.com/wp-content/uploads/2022/11/cute-frog-pfp-2.jpg"
+              src={UserIcon}
               alt="user pfp"
               width={40}
               height={40}

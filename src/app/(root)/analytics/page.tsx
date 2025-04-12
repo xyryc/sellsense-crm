@@ -11,11 +11,13 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { ChartSpline } from "lucide-react";
 
 const Analytics = () => {
   const [salesData, setSalesData] = useState<any>(null); // Use `any` for simplicity
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  console.log(salesData)
 
   useEffect(() => {
     const fetchSalesData = async () => {
@@ -46,9 +48,20 @@ const Analytics = () => {
 
   return (
     <div>
-      <h1>Sales Analytics</h1>
-      <h2>Total Sales for 2025: {salesData?.total_sales_2025} TK</h2>
-      <h2 className="text-xl font-semibold mb-4">Next 1 year Sales Prediction</h2>
+      <h1 className="text-xl font-bold mb-4">Sales Analytics</h1>
+
+      <div className="p-6 dark:bg-white/10 sm:inline-flex items-center gap-6 rounded-xl border drop-shadow-md">
+        <div className="p-4 text-green-600 bg-green-200 rounded-full inline-flex">
+          <ChartSpline />
+        </div>
+
+        <div>
+          <p className="font-bold text-xl">${salesData?.total_sales_2025}</p>
+          <p className="text-sm tracking-wide">Total Predicted Sales (1 Year)</p>
+        </div>
+      </div>
+
+      <h2 className="text-xl font-semibold my-6">Predicted Sales Graph (1 Year)</h2>
       {/* Line Chart for Sales Prediction */}
       <ResponsiveContainer width="100%" height={350}>
         <LineChart data={salesData?.monthly_sales_prediction}>
