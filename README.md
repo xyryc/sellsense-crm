@@ -1,6 +1,14 @@
-# SellSense
+# SellSense CRM
 
 SellSense is a comprehensive CRM platform designed to give administrators a complete overview of their store, suppliers, inventory, customers, sales analytics, payment statuses, and AI-powered support.
+
+## 📸 Screenshot
+
+![Dashboard Screenshot](/src/assets/dashboard.png)
+![Orders Screenshot](/src/assets/orders.png)
+![Prediction Screenshot](/src/assets/prediction.png)
+![Support Screenshot](/src/assets/support.png)
+
 
 ## Live Link 
 Live Site: [Sellsense](https://sellsense.vercel.app)
@@ -134,21 +142,27 @@ Ensure you have the following installed:
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/your-repo.git
-   cd your-repo
+   git clone https://github.com/xyryc/sellsense-crm.git
+   cd sellsense-crm
    ```
 2. Install dependencies:
    ```sh
-   npm install  # or yarn install or bun install
+   npm install  # or yarn install
    ```
 3. Create an `.env.local` file:
    ```sh
    touch .env.local
    ```
    Example:
+
    ```env
-   NEXT_PUBLIC_API_URL=https://api.example.com
-   DATABASE_URL=mongodb+srv://your-db-connection-string
+   MONGODB_URI=mongodb+srv://your-db-connection-string
+   GOOGLE_ID=your_google_project_id
+   GOOGLE_SECRET=your_google_secret
+   ADMIN_EMAIL=admin@gmail.com
+   ADMIN_PASSWORD=admin123
+   AUTH_SECRET=your_auth_secret
+   GEMINI_API_KEY=gemini_api_key
    ```
 
 ### 🏃 Running the Project
@@ -156,7 +170,7 @@ Ensure you have the following installed:
 #### Development Mode
 
 ```sh
-npm run dev  # or yarn dev or bun dev
+npm run dev  # or yarn dev
 ```
 
 Visit `http://localhost:3000` in your browser.
@@ -164,8 +178,8 @@ Visit `http://localhost:3000` in your browser.
 #### Production Mode
 
 ```sh
-npm run build  # or yarn build or bun build
-npm start  # or yarn start or bun start
+npm run build  # or yarn build
+npm start  # or yarn start
 ```
 
 ### 🚀 Deployment
@@ -182,7 +196,3 @@ Or manually:
 npm run build
 npm start
 ```
-
----
-
-**Happy Coding! 🎉**
